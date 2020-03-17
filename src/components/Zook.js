@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ApiZook from "../api/zook";
 
-export default class Zook extends React.Component {
-
-    id = this.props.match.params.id;
+export default class Zook extends Component {
 
     state = {
         loading: true,
         zook: null,
     };
+
+
+    id = this.props.match.params.id;
+
+
 
     async componentDidMount() {
         ApiZook.get(this.id).then(value => this.setState({
@@ -18,13 +21,13 @@ export default class Zook extends React.Component {
     };
 
     Trial(props) {
-        if(props.trail == null) {
+        if (props.trail == null) {
             return (<tr>
                 <td>{props.trialName}</td>
                 <td>N/A</td>
                 <td>N/A</td>
             </tr>);
-        }else{
+        } else {
             return (<tr>
                 <td>{props.trialName}</td>
                 <td>{props.trail.score} cm/s</td>
@@ -41,7 +44,7 @@ export default class Zook extends React.Component {
             <div>
                 <div>
                     <div>
-                        {/*<img src="@imageLink"/>*/}
+                        <img src={"static.zooklabs.com/" + this.state.zook.id + "/image.png"}/>
                     </div>
                     <p>Zook Name: {this.state.zook.name}
 
@@ -54,7 +57,8 @@ export default class Zook extends React.Component {
                         Number of Downloads: --
                         Number of times viewed: --
 
-                        <a href="/">Download</a></p>
+                        <a href={"static.zooklabs.com/" + this.state.zook.id + "/" + this.state.zook.name + ".zook"}>Download</a>
+                    </p>
                 </div>
                 <div>
                     <table>
