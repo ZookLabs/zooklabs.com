@@ -49,7 +49,7 @@ class Menu extends Component {
                         to='/upload'
                         active={activeItem === '/upload'}
                         onClick={this.handleItemClick}>
-                        Leagues
+                        Upload
                     </SMenu.Item>
                 </SMenu>
             </Container>
