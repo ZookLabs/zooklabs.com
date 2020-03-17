@@ -5,9 +5,10 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import Menu from './components/Menu'
 import Home from "./components/Home";
-import {Container, Segment} from "semantic-ui-react";
+import {Container} from "semantic-ui-react";
 import Zooks from "./components/Zooks";
 import Leagues from "./components/Leagues";
+import Zook from "./components/Zook";
 
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
                     <Switch>
                         <Route path="/" exact children={Home}/>
                         {/*<Route path="/zook/upload" component={Upload}/>*/}
-                        {/*<Route path="/zook/:id" component={Zook}/>*/}
+                        <Route path="/zook/:id" component={Zook}/>
                         <Route path="/zook" exact component={Zooks}/>
                         <Route path="/leagues" exact children={Leagues}/>
                         <Route path="/leagues/sprint" children={Sprint}/>
