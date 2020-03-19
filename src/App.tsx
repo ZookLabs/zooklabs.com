@@ -9,6 +9,7 @@ import {Container} from "semantic-ui-react";
 import Zooks from "./components/Zooks";
 import Leagues from "./components/Leagues";
 import Zook from "./components/Zook";
+import Upload from "./components/Upload";
 
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
                 <Container>
                     <Switch>
                         <Route path="/" exact children={Home}/>
-                        {/*<Route path="/zook/upload" component={Upload}/>*/}
+                        <Route path="/zook/upload" exact component={Upload}/>
                         <Route path="/zook/:id" component={Zook}/>
                         <Route path="/zook" exact component={Zooks}/>
                         <Route path="/leagues" exact children={Leagues}/>

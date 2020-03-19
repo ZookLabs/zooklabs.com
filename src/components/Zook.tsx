@@ -54,7 +54,7 @@ export default class Zook extends Component {
                 <div>
                     <div>
                         <div>
-                            <img src={"static.zooklabs.com/zook/" + this.state.zook.id + "/image.png"}/>
+                            <img src={"http://static.zooklabs.com/zook/" + this.state.zook.id + "/image.png"}/>
                         </div>
                         <p>Zook Name: {this.state.zook.name}
 
@@ -67,7 +67,7 @@ export default class Zook extends Component {
                             Number of Downloads: --
                             Number of times viewed: --
 
-                            <a href={"static.zooklabs.com/" + this.state.zook.id + "/" + this.state.zook.name + ".zook"}>Download</a>
+                            <a href={"http://static.zooklabs.com/zook/" + this.state.zook.id + "/" + this.state.zook.name + ".zook"} download>Download</a>
                         </p>
                     </div>
                     <div>

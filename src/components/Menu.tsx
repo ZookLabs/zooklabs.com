@@ -46,8 +46,8 @@ class Menu extends Component {
 
                     <SMenu.Item
                         as={Link}
-                        to='/upload'
-                        active={activeItem === '/upload'}
+                        to='/zook/upload'
+                        active={activeItem === '/zook/upload'}
                         onClick={this.handleItemClick}>
                         Upload
                     </SMenu.Item>
