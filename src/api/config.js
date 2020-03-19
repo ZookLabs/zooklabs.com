@@ -1,3 +1,3 @@
-const SERVER_BASE_URL = "https://zooklabs.herokuapp.com";
+const API_URL = "https://zooklabs.herokuapp.com";
 
-export default SERVER_BASE_URL;
+export default API_URL;

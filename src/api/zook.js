@@ -1,4 +1,4 @@
-import API_URL from '../config';
+import API_URL from './config';
 
 export default class ApiZook {
 
