@@ -30,8 +30,8 @@ class Menu extends Component {
 
                     <SMenu.Item
                         as={Link}
-                        to='/zook'
-                        active={activeItem === '/zook'}
+                        to='/zooks'
+                        active={activeItem === '/zooks'}
                         onClick={this.handleItemClick}>
                         Zooks
                     </SMenu.Item>
@@ -46,8 +46,8 @@ class Menu extends Component {
 
                     <SMenu.Item
                         as={Link}
-                        to='/zook/upload'
-                        active={activeItem === '/zook/upload'}
+                        to='/zooks/upload'
+                        active={activeItem === '/zooks/upload'}
                         onClick={this.handleItemClick}>
                         Upload
                     </SMenu.Item>

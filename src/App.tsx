@@ -19,9 +19,9 @@ export default function App() {
                 <Container>
                     <Switch>
                         <Route path="/" exact children={Home}/>
-                        <Route path="/zook/upload" exact component={Upload}/>
-                        <Route path="/zook/:id" component={Zook}/>
-                        <Route path="/zook" exact component={Zooks}/>
+                        <Route path="/zooks/upload" exact component={Upload}/>
+                        <Route path="/zooks/:id" component={Zook}/>
+                        <Route path="/zooks" exact component={Zooks}/>
                         <Route path="/leagues" exact children={Leagues}/>
                         <Route path="/leagues/sprint" children={Sprint}/>
                         <Route path="/leagues/blockpush" children={BlockPush}/>

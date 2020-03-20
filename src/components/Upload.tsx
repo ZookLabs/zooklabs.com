@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ApiZook from "../api/zook";
-import {Button, Form, Message} from 'semantic-ui-react'
+import {Button, Form, Header, Message, Segment} from 'semantic-ui-react'
 import {Redirect} from 'react-router-dom';
 
 class Upload extends Component {
@@ -20,14 +20,14 @@ class Upload extends Component {
     onFormSubmit(e: any) {
         e.preventDefault(); // Stop form submit
         if (this.state.formData.get('zook') === null) {
-            this.setState({error: 'Please Select A File', isLoading: false});
+            this.setState({error: 'Please Select A Zook', isLoading: false});
         } else {
             this.setState({isLoading: true});
             ApiZook.upload(this.state.formData).then(response => {
                 if (response.id !== undefined) {
                     this.setState({zookid: response.id, error: ''})
-                } else if (response.reason !== undefined) {
-                    this.setState({error: response.reason, isLoading: false});
+                } else if (response.error !== undefined) {
+                    this.setState({error: response.error, isLoading: false});
                 } else {
                     this.setState({error: 'Something Went Wrong', isLoading: false});
                 }
@@ -45,24 +45,30 @@ class Upload extends Component {
 
     render() {
         if (this.state.zookid !== 0) {
-            return <Redirect to={'/zook/' + this.state.zookid}/>
+            return <Redirect to={'/zooks/' + this.state.zookid}/>
         }
         return (
-            <div>
-                <Form error loading={this.state.isLoading} onSubmit={this.onFormSubmit}>
-                    <h1>Zook Upload</h1>
-                    <Form.Field>
-                        <label>Zook File</label>
-                        <input type='file' onChange={this.onChange}/>
-                    </Form.Field>
-                    <Message hidden={this.state.error === ''}
-                             error
-                             header='Error'
-                             content={this.state.error}
-                    />
-                    <Button type="submit">Upload</Button>
-                </Form>
-            </div>
+            <Segment.Group>
+                <Segment>
+                    <Header>
+                        Zook Upload
+                    </Header>
+                </Segment>
+                <Segment>
+                    <Form error={this.state.error !== ''} loading={this.state.isLoading} onSubmit={this.onFormSubmit}>
+                        <Message
+                            error
+                            header='Error'
+                            content={this.state.error}
+                        />
+                        <Form.Field>
+                            <label>Zook File</label>
+                            <input type='file' onChange={this.onChange} accept=".zook"/>
+                        </Form.Field>
+                        <Button type="submit">Upload</Button>
+                    </Form>
+                </Segment>
+            </Segment.Group>
         )
     }
 }

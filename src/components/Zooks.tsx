@@ -22,7 +22,7 @@ export default class Zooks extends Component {
             return <Loader active inline='centered'/>;
         } else {
             const zookItems = this.state.zooks.map(({id, name}) => (
-                <List.Item as='a' href={"/zook/" + id}>
+                <List.Item as='a' href={"/zooks/" + id}>
                     <List.Header>{name}</List.Header>
                 </List.Item>
             ))

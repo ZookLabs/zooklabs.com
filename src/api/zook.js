@@ -4,7 +4,7 @@ export default class ApiZook {
 
     // get a list of zooks
     static getList() {
-        return fetch(`${API_URL}/api/zook`, {
+        return fetch(`${API_URL}/api/zooks`, {
             method: 'get',
             headers: new Headers({'content-type': 'application/json'})
         }).then(response => response.json());
@@ -12,7 +12,7 @@ export default class ApiZook {
 
     // get zook detail
     static get(id) {
-        return fetch(`${API_URL}/api/zook/${id}`, {
+        return fetch(`${API_URL}/api/zooks/${id}`, {
             method: 'get',
             headers: new Headers({'content-type': 'application/json'})
         }).then(response => response.json());
@@ -20,7 +20,7 @@ export default class ApiZook {
 
 
     static upload(formData) {
-        return fetch(`${API_URL}/api/zook/upload`, {
+        return fetch(`${API_URL}/api/zooks/upload`, {
             method: 'post',
             body: formData,
         }).then(response => response.json());
