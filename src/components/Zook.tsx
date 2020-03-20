@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ApiZook from "../api/zook";
 import Trial from "./Trial";
-import {Grid, Table, Segment, Header, Loader, Image} from 'semantic-ui-react';
+import {Grid, Table, Segment, Header, Loader} from 'semantic-ui-react';
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 
 export default class Zook extends Component {
@@ -65,7 +65,7 @@ export default class Zook extends Component {
                             <div className="two column row ui segment attached">
                                 <Grid.Column style={{flex: "0"}}>
                                     <img src={"http://static.zooklabs.com/zooks/" + this.state.zook.id + "/image.png"}
-                                         style={{minWidth: 256, maxWidth: 256}}/>
+                                         style={{minWidth: 256, maxWidth: 256}} alt={"" + this.state.zook.name}/>
                                     <Button color='blue' as="a" icon="download" fluid content="Download Zook"
                                             href={"http://static.zooklabs.com/zooks/" + this.state.zook.id + "/" + this.state.zook.name + ".zook"}/>
                                 </Grid.Column>
@@ -138,7 +138,7 @@ export default class Zook extends Component {
                                             <Table.Row>
                                                 <Table.HeaderCell colSpan={3}>Achievements</Table.HeaderCell>
                                             </Table.Row>
-                                            <Table.Row stackable={false}>
+                                            <Table.Row>
                                                 <Table.HeaderCell>Trial</Table.HeaderCell>
                                                 <Table.HeaderCell>Result</Table.HeaderCell>
                                                 <Table.HeaderCell>Position</Table.HeaderCell>

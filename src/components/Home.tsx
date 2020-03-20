@@ -1,9 +1,16 @@
 import React from 'react';
+import {Header, Segment} from "semantic-ui-react";
 
 function Home() {
-  return (
-      <h1>Welcome To Zook Labs</h1>
-  );
+    return (
+        <Segment.Group>
+            <Segment>
+                <Header size="huge">
+                    Welcome To Zook Labs!
+                </Header>
+            </Segment>
+        </Segment.Group>
+    );
 }
 
 export default Home;

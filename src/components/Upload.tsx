@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ApiZook from "../api/zook";
-import {Button, Form, Header, Message, Segment} from 'semantic-ui-react'
+import {Button, Form, Header, Icon, Message, Segment, Table} from 'semantic-ui-react'
 import {Redirect} from 'react-router-dom';
 
 class Upload extends Component {
@@ -50,9 +50,28 @@ class Upload extends Component {
         return (
             <Segment.Group>
                 <Segment>
-                    <Header>
+                    <Header size='huge'>
                         Zook Upload
                     </Header>
+                </Segment>
+                <Segment>
+                    <Table compact color="orange" inverted>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell> <Icon name='attention'/> Upload Requirements</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                            <Table.Row>
+                                <Table.Cell error>
+                                    <Icon name='attention'/>Must have a Passport Photo</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell error>
+                                    <Icon name='attention'/>Does not support Street Rules</Table.Cell>
+                            </Table.Row>
+                        </Table.Body>
+                    </Table>
                 </Segment>
                 <Segment>
                     <Form error={this.state.error !== ''} loading={this.state.isLoading} onSubmit={this.onFormSubmit}>
@@ -61,11 +80,14 @@ class Upload extends Component {
                             header='Error'
                             content={this.state.error}
                         />
+
+
                         <Form.Field>
                             <label>Zook File</label>
                             <input type='file' onChange={this.onChange} accept=".zook"/>
                         </Form.Field>
-                        <Button type="submit">Upload</Button>
+
+                        <Button type="submit" color='blue' icon="upload" content="Upload Zook"/>
                     </Form>
                 </Segment>
             </Segment.Group>
