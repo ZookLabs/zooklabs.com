@@ -29,11 +29,11 @@ export default class League extends Component<LeagueProps> {
         if (this.state.loading) {
             return <Loader active inline='centered'/>;
         } else {
-            const zookItems = this.state.zooks.map(({id, name, score, position}) => (
+            const zookItems = this.state.zooks.map(({zookId, name, score, position}) => (
                 <Table.Row key={position}>
                     <Table.Cell><b>{position}</b></Table.Cell>
                     <Table.Cell><b>{score}</b></Table.Cell>
-                    <a href={"/zooks/" + id}
+                    <a href={"/zooks/" + zookId}
                        style={{display: 'contents', color: "rgba(0,0,0,.87)", verticalAlign: "middle"}}>
                         <Table.Cell>
                             <b>{name}</b>
@@ -42,7 +42,7 @@ export default class League extends Component<LeagueProps> {
                     <Table.Cell>
                         {
                             position < 6 ?
-                                <Image src={`http://static.zooklabs.com/zooks/${id}/image.png`}
+                                <Image src={`http://static.zooklabs.com/zooks/${zookId}/image.png`}
                                        size={position === 1 ? "small" : "tiny"}/> : null
                         }
                     </Table.Cell>
