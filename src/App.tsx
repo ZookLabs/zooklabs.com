@@ -10,67 +10,32 @@ import Zooks from "./components/Zooks";
 import Leagues from "./components/Leagues";
 import Zook from "./components/Zook";
 import Upload from "./components/Upload";
+import League from "./components/League";
 
 
 export default function App() {
     return (
-            <Router>
-                <Menu/>
-                <Container>
-                    <Switch>
-                        <Route path="/" exact children={Home}/>
-                        <Route path="/zooks/upload" exact component={Upload}/>
-                        <Route path="/zooks/:id" component={Zook}/>
-                        <Route path="/zooks" exact component={Zooks}/>
-                        <Route path="/leagues" exact children={Leagues}/>
-                        <Route path="/leagues/sprint" children={Sprint}/>
-                        <Route path="/leagues/blockpush" children={BlockPush}/>
-                        <Route path="/leagues/hurdles" children={Hurdles}/>
-                        <Route path="/leagues/highjump" children={HighJump}/>
-                        <Route path="/leagues/lap" children={Lap}/>
-                    </Switch>
-                </Container>
-            </Router>
-    );
-}
-
-
-function Sprint() {
-    return (
-        <div>
-            <h3>Sprint</h3>
-        </div>
-    );
-}
-
-function BlockPush() {
-    return (
-        <div>
-            <h3>BlockPush</h3>
-        </div>
-    );
-}
-
-function Hurdles() {
-    return (
-        <div>
-            <h3>Hurdles</h3>
-        </div>
-    );
-}
-
-function HighJump() {
-    return (
-        <div>
-            <h3>HighJump</h3>
-        </div>
-    );
-}
-
-function Lap() {
-    return (
-        <div>
-            <h3>Lap</h3>
-        </div>
+        <Router>
+            <Menu/>
+            <Container>
+                <Switch>
+                    <Route path="/" exact children={Home}/>
+                    <Route path="/zooks/upload" exact component={Upload}/>
+                    <Route path="/zooks/:id" component={Zook}/>
+                    <Route path="/zooks" exact component={Zooks}/>
+                    <Route path="/leagues" exact component={Leagues}/>
+                    <Route path="/leagues/sprint"
+                           render={props => <League {...props} league="sprint" title="Sprint"/>}/>
+                    <Route path="/leagues/block_push"
+                           render={props => <League {...props} league="block_push" title="Block Push"/>}/>
+                    <Route path="/leagues/hurdles"
+                           render={props => <League {...props} league="hurdles" title="Hurdles"/>}/>
+                    <Route path="/leagues/high_jump"
+                           render={props => <League {...props} league="high_jump" title="High Jump"/>}/>
+                    <Route path="/leagues/lap"
+                           render={props => <League {...props} league="lap" title="Lap"/>}/>
+                </Switch>
+            </Container>
+        </Router>
     );
 }
