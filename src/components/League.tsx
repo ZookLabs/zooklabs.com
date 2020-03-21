@@ -30,8 +30,8 @@ export default class League extends Component<LeagueProps> {
             return <Loader active inline='centered'/>;
         } else {
             const zookItems = this.state.zooks.map(({zookId, name, score, position}) => (
-                <Table.Row key={position}>
-                    <Table.Cell><b>{position}</b></Table.Cell>
+                <Table.Row key={zookId}>
+                    <Table.Cell><b>{position === 2147483647 ? '--' : position}</b></Table.Cell>
                     <Table.Cell><b>{score}</b></Table.Cell>
                     <a href={"/zooks/" + zookId}
                        style={{display: 'contents', color: "rgba(0,0,0,.87)", verticalAlign: "middle"}}>
