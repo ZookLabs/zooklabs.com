@@ -4,7 +4,8 @@ import {Header, Loader, Segment, Table, Image} from "semantic-ui-react";
 
 type LeagueProps = {
     league: string,
-    title: string
+    title: string,
+    measurement: string
 }
 
 export default class League extends Component<LeagueProps> {
@@ -32,7 +33,7 @@ export default class League extends Component<LeagueProps> {
             const zookItems = this.state.zooks.map(({zookId, name, score, position}) => (
                 <Table.Row key={zookId}>
                     <Table.Cell><b>{position === 2147483647 ? '--' : position}</b></Table.Cell>
-                    <Table.Cell><b>{score}</b></Table.Cell>
+                    <Table.Cell><b>{score}&nbsp;{this.props.measurement}</b></Table.Cell>
                     <a href={"/zooks/" + zookId}
                        style={{display: 'contents', color: "rgba(0,0,0,.87)", verticalAlign: "middle"}}>
                         <Table.Cell>
@@ -56,7 +57,7 @@ export default class League extends Component<LeagueProps> {
                         </Header>
                     </Segment>
                     <Segment>
-                        <Table basic='very' selectable>
+                        <Table basic='very' selectable unstackable>
                             <Table.Header>
                                 <Table.Row>
                                     <Table.HeaderCell collapsing>Position</Table.HeaderCell>

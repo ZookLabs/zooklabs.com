@@ -25,15 +25,15 @@ export default function App() {
                     <Route path="/zooks" exact component={Zooks}/>
                     <Route path="/leagues" exact component={Leagues}/>
                     <Route path="/leagues/sprint"
-                           render={props => <League {...props} league="sprint" title="Sprint"/>}/>
+                           render={props => <League {...props} league="sprint" title="Sprint" measurement="cm/sec"/>}/>
                     <Route path="/leagues/block_push"
-                           render={props => <League {...props} league="block_push" title="Block Push"/>}/>
+                           render={props => <League {...props} league="block_push" title="Block Push" measurement="cm"/>}/>
                     <Route path="/leagues/hurdles"
-                           render={props => <League {...props} league="hurdles" title="Hurdles"/>}/>
+                           render={props => <League {...props} league="hurdles" title="Hurdles" measurement="cm/sec"/>}/>
                     <Route path="/leagues/high_jump"
-                           render={props => <League {...props} league="high_jump" title="High Jump"/>}/>
+                           render={props => <League {...props} league="high_jump" title="High Jump" measurement="cm"/>}/>
                     <Route path="/leagues/lap"
-                           render={props => <League {...props} league="lap" title="Lap"/>}/>
+                           render={props => <League {...props} league="lap" title="Lap" measurement="sec"/>}/>
                 </Switch>
             </Container>
         </Router>
