@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import ApiZook from "../api/zook";
-import {Header, Loader, Segment, Table, Image} from "semantic-ui-react";
+import {Header, Image, Loader, Segment, Table} from "semantic-ui-react";
 
 type LeagueProps = {
     league: string,
@@ -12,7 +12,10 @@ export default class League extends Component<LeagueProps> {
 
     state = {
         loading: true,
-        zooks: [],
+        league: {
+            updatedAt: '',
+            entries: []
+        },
     };
 
     constructor(props: LeagueProps) {
@@ -22,7 +25,7 @@ export default class League extends Component<LeagueProps> {
     async componentDidMount() {
         ApiZook.getLeague(this.props.league).then(value => this.setState({
             loading: false,
-            zooks: value,
+            league: value,
         }));
     };
 
@@ -30,7 +33,7 @@ export default class League extends Component<LeagueProps> {
         if (this.state.loading) {
             return <Loader active inline='centered'/>;
         } else {
-            const zookItems = this.state.zooks.map(({zookId, name, score, position}) => (
+            const zookItems = this.state.league.entries.map(({zookId, name, score, position}) => (
                 <Table.Row key={zookId}>
                     <Table.Cell><b>{position === 2147483647 ? '--' : position}</b></Table.Cell>
                     <Table.Cell><b>{score}&nbsp;{this.props.measurement}</b></Table.Cell>
@@ -55,6 +58,9 @@ export default class League extends Component<LeagueProps> {
                         <Header size="huge">
                             {this.props.title} League
                         </Header>
+                    </Segment>
+                    <Segment secondary inverted size='tiny' style={{paddingTop: "6px", paddingBottom: "6px"}}>
+                        <b>Updated : {this.state.league.updatedAt}</b>
                     </Segment>
                     <Segment>
                         <Table basic='very' selectable unstackable>
