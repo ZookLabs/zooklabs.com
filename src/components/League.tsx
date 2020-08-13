@@ -1,35 +1,47 @@
-import React, {Component} from "react";
-import ApiZook from "../api/zook";
-import {Header, Image, Loader, Segment, Table} from "semantic-ui-react";
+import React, {Component} from "react"
+import ApiZook from "../api/zook"
+import {Header, Image, Loader, Segment, Table} from "semantic-ui-react"
 
-type LeagueProps = {
-    league: string,
-    title: string,
+interface ILeagueProps {
+    league: string
+    title: string
     measurement: string
 }
 
-export default class League extends Component<LeagueProps> {
+interface ILeagueState {
+    loading: boolean
+    league?: {
+        updatedAt: string
+        entries: {
+            zookId: number
+            name: string
+            score: number
+            position: number
+        }[]
+    }
+}
 
-    state = {
-        loading: true,
-        league: {
-            updatedAt: '',
-            entries: []
-        },
-    };
+export default class League extends Component<ILeagueProps, ILeagueState> {
+
+    constructor(props: ILeagueProps) {
+        super(props)
+        this.state = {
+            loading: true
+        }
+    }
 
     async componentDidMount() {
         ApiZook.getLeague(this.props.league).then(value => this.setState({
             loading: false,
-            league: value,
-        }));
-    };
+            league: value
+        }))
+    }
 
     render() {
-        if (this.state.loading) {
-            return <Loader active inline='centered'/>;
+        if (this.state.loading && this.state.league) {
+            return <Loader active inline='centered'/>
         } else {
-            const zookItems = this.state.league.entries.map(({zookId, name, score, position}) => (
+            const zookItems = this.state.league?.entries.map(({zookId, name, score, position}) => (
                 <Table.Row key={zookId}>
                     <Table.Cell><b>{position === 2147483647 ? '--' : position}</b></Table.Cell>
                     <Table.Cell><b>{score}&nbsp;{this.props.measurement}</b></Table.Cell>
@@ -56,7 +68,7 @@ export default class League extends Component<LeagueProps> {
                         </Header>
                     </Segment>
                     <Segment secondary inverted size='tiny' style={{paddingTop: "6px", paddingBottom: "6px"}}>
-                        <b>Updated : {this.state.league.updatedAt}</b>
+                        <b>Updated : {this.state.league?.updatedAt}</b>
                     </Segment>
                     <Segment>
                         <Table basic='very' selectable unstackable>
