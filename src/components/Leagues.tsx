@@ -1,39 +1,35 @@
-import React, {Component} from "react";
-import {Card, Grid, Header, Segment, Image} from "semantic-ui-react";
-import ApiZook from "../api/zook";
+import React, {FC, useEffect, useState} from "react";
+import {Card, Grid, Header, Image, Placeholder, Segment} from "semantic-ui-react";
+import axios from "axios";
 
+type TLeagues = {
+    block_push: number
+    sprint: number
+    hurdles: number
+    lap: number
+    high_jump: number
+}
 
-export default class Leagues extends Component{
+const Leagues: FC = () => {
+    const [leagues, setLeagues] = useState<TLeagues>()
 
+    useEffect(() => {
+        axios.get<TLeagues>('/leagues').then(response => {
+                setLeagues(response.data)
+            }
+        )
+    }, [])
 
-    state = {
-        loading: true,
-        leagues: {
-            "block_push": null,
-            "sprint": null,
-            "hurdles": null,
-            "lap": null,
-            "high_jump": null
-        },
-    };
-
-    constructor(props: any) {
-        super(props);
-        this.leagueCard = this.leagueCard.bind(this);
-    }
-
-    async componentDidMount() {
-        ApiZook.getLeagues().then(value => this.setState({
-            loading: false,
-            leagues: value,
-        }));
-    };
-
-    leagueCard(league: any, id: number, name: string, description: string)
-    {
+    let leagueCard = (league: string, id: number | undefined, name: string, description: string) => {
         return (
-            <Card as='a' href={'/leagues/'+league}>
-                <Image src={'http://static.zooklabs.com/zooks/' + id  + '/image.png'} wrapped ui={false}/>
+            <Card as='a' href={'/leagues/' + league}>
+                {id ? (
+                    <Image src={'http://static.zooklabs.com/zooks/' + id + '/image.png'} wrapped ui={false}/>
+                ) : (
+                    <Placeholder>
+                        <Placeholder.Image square/>
+                    </Placeholder>
+                )}
                 <Card.Content>
                     <Card.Header>{name}</Card.Header>
                     <Card.Description>
@@ -41,44 +37,42 @@ export default class Leagues extends Component{
                     </Card.Description>
                 </Card.Content>
             </Card>
-        );
+        )
     }
 
-     render() {
+    return (
+        <Segment.Group>
+            <Segment>
+                <Header size="huge">
+                    Leagues
+                </Header>
+            </Segment>
+            <Segment>
+                <Grid stackable>
+                    <Grid.Row columns={3}>
+                        <Grid.Column>
+                            {leagueCard('sprint', leagues?.sprint, 'Sprint', 'Which is the fastest Zook in the world? Check the Sprint Trial League.')}
+                        </Grid.Column>
+                        <Grid.Column>
+                            {leagueCard('high_jump', leagues?.high_jump, 'High Jump', 'The Zooks are jumping higher and higher, but which is the highest?')}
+                        </Grid.Column>
+                        <Grid.Column>
+                            {leagueCard('lap', leagues?.lap, 'Single Lap', 'Whose Zook can run a lap faster than all the other Zooks?')}
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row columns={3}>
+                        <Grid.Column>
+                            {leagueCard('block_push', leagues?.block_push, 'Block Push', 'There\'s some stiff competition in the Block Push Trial League...')}
+                        </Grid.Column>
+                        <Grid.Column>
+                            {leagueCard('hurdles', leagues?.hurdles, 'Hurdles', 'Which Zook does the best at getting over the hurdles?')}
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
 
-         return (
-             <Segment.Group>
-                 <Segment>
-                     <Header size="huge">
-                         Leagues
-                     </Header>
-                 </Segment>
-                 <Segment>
-                     <Grid stackable>
-                         <Grid.Row columns={3}>
-                             <Grid.Column>
-                                 {this.leagueCard('sprint', this.state.leagues.sprint || 0, 'Sprint', 'Which is the fastest Zook in the world? Check the Sprint Trial League.')}
-                             </Grid.Column>
-                             <Grid.Column>
-                                 {this.leagueCard('high_jump', this.state.leagues.high_jump || 0, 'High Jump', 'The Zooks are jumping higher and higher, but which is the highest?')}
-                             </Grid.Column>
-                             <Grid.Column>
-                                 {this.leagueCard('lap', this.state.leagues.lap || 0, 'Single Lap', 'Whose Zook can run a lap faster than all the other Zooks?')}
-                             </Grid.Column>
-                         </Grid.Row>
-                         <Grid.Row columns={3}>
-                             <Grid.Column>
-                                 {this.leagueCard('block_push', this.state.leagues.block_push || 0, 'Block Push', 'There\'s some stiff competition in the Block Push Trial League...')}
-                             </Grid.Column>
-                             <Grid.Column>
-                                 {this.leagueCard('hurdles', this.state.leagues.hurdles || 0, 'Hurdles', 'Which Zook does the best at getting over the hurdles?')}
-                             </Grid.Column>
-                         </Grid.Row>
-                     </Grid>
-
-                 </Segment>
-             </Segment.Group>
-         );
-     }
+            </Segment>
+        </Segment.Group>
+    )
 }
 
+export default Leagues
