@@ -18,10 +18,6 @@ export default class League extends Component<LeagueProps> {
         },
     };
 
-    constructor(props: LeagueProps) {
-        super(props);
-    }
-
     async componentDidMount() {
         ApiZook.getLeague(this.props.league).then(value => this.setState({
             loading: false,

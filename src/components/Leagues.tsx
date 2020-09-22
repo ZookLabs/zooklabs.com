@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, Grid, Header, Icon, Segment, Image} from "semantic-ui-react";
+import {Card, Grid, Header, Segment, Image} from "semantic-ui-react";
 import ApiZook from "../api/zook";
 
 
