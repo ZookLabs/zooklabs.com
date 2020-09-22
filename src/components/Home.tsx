@@ -8,6 +8,7 @@ function Home() {
                 <Header size="huge">
                     Welcome To Zook Labs!
                 </Header>
+                {process.env.REACT_APP_WELCOME_MESSAGE}
             </Segment>
         </Segment.Group>
     );
