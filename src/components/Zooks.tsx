@@ -1,28 +1,38 @@
 import React, {Component} from 'react';
-import ApiZook from "../api/zook";
 import {Header, Icon, List, Loader, Segment} from "semantic-ui-react";
+import axios from 'axios';
+import {TZookIdentifier} from "../types/TZookIdentifier";
 
-export default class Zooks extends Component {
+interface IZooksProps {
 
+}
+
+interface IZooksState {
+    loading: boolean
+    zooks: TZookIdentifier[],
+}
+
+export default class Zooks extends Component<IZooksProps,IZooksState> {
     state = {
         loading: true,
-        zooks: [],
-    };
+        zooks: []
+    }
 
     async componentDidMount() {
-        ApiZook.getList().then(value => this.setState({
-            loading: false,
-            zooks: value,
-        }));
-    };
+        axios.get<TZookIdentifier[]>('/zooks').then(response =>
+            this.setState({
+                loading: false,
+                zooks: response.data
+            })
+        )
+    }
 
     render() {
-
         if (this.state.loading) {
             return <Loader active inline='centered'/>;
         } else {
             const zookItems = this.state.zooks.map(({id, name}) => (
-                <List.Item href={"/zooks/" + id}>
+                <List.Item href={"/zooks/" + id} key={id}>
                     <Icon name='bug' inverted/>
                     <List.Content>
                         <List.Header>{id} - <b>{name}</b></List.Header>
@@ -42,7 +52,6 @@ export default class Zooks extends Component {
                         </List>
                     </Segment>
                 </Segment.Group>
-
             )
         }
     }
