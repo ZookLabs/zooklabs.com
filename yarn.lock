@@ -9645,11 +9645,6 @@ semantic-ui-css@^2.4.1:
   dependencies:
     jquery x.*
 
-semantic-ui-react-input-file@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/semantic-ui-react-input-file/-/semantic-ui-react-input-file-1.0.3.tgz#016803d4377cf888cdf052290ecc4cce8ceed4ee"
-  integrity sha512-DqXkVCNz0hWgJCiAO+k2LdO1HyJUVwTCH29tCXMoJfw0yu8EXJ98QBDp3RR4zt5Xi5Z4tA+j3TGaqs7wujztVQ==
-
 semantic-ui-react@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-1.2.1.tgz#c58603db072d3628fc2d9b626f6c3b39535deca3"
