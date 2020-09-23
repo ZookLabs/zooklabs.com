@@ -15,7 +15,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "semantic-ui-react": "^0.88.2",
     "typescript": "^3.9.7"
