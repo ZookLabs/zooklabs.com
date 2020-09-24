@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Header, Icon, List, Loader, Segment} from "semantic-ui-react";
 import axios from 'axios';
 import {TUserIdentifier} from "../types/TUserIdentifier";
+import {Link} from "react-router-dom";
 
 
 interface IUsersProps {
@@ -33,7 +34,7 @@ export default class Users extends Component<IUsersProps, IUsersState> {
             return <Loader active inline='centered'/>;
         } else {
             const userItems = this.state.users.map(({username}) => (
-                <List.Item href={"/users/" + username} key={username}>
+                <List.Item as={Link} to={`/users/${username}`} key={username}>
                     <Icon name='user' inverted/>
                     <List.Content>
                         <List.Header>{username}</List.Header>
