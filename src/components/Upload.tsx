@@ -1,52 +1,66 @@
-import React, {Component} from 'react'
-import ApiZook from "../api/zook";
+import React, {FC, useState} from 'react'
 import {Button, Form, Header, Icon, Message, Segment, Table} from 'semantic-ui-react'
 import {Redirect} from 'react-router-dom';
+import axios, {AxiosError} from "axios";
 
-class Upload extends Component {
-    state = {
-        isLoading: false,
-        error: '',
-        formData: new FormData(),
-        zookid: 0
-    }
+type TUploadResponse = {
+    id: number
+}
 
-    constructor(props: any) {
-        super(props);
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
-    }
+type TUploadError = {
+    error: string
+}
 
-    onFormSubmit(e: any) {
-        e.preventDefault(); // Stop form submit
-        if (this.state.formData.get('zook') === null) {
-            this.setState({error: 'Please Select A Zook', isLoading: false});
-        } else {
-            this.setState({isLoading: true});
-            ApiZook.upload(this.state.formData).then(response => {
-                if (response.id !== undefined) {
-                    this.setState({zookid: response.id, error: ''})
-                } else if (response.error !== undefined) {
-                    this.setState({error: response.error, isLoading: false});
+const Upload: FC = () => {
+    const [zookId, setZookId] = useState<number>()
+    const [loading, setLoading] = useState<boolean>(false)
+    const [fileValid, setFileValid] = useState<boolean>(false)
+
+    const [formData, setFormData] = useState<FormData>(new FormData())
+
+    const [uploadError, setUploadError] = useState<string>()
+
+
+    const handleSubmit = () => {
+        if (formData.get('zook')) {
+            setLoading(true)
+            axios.post<TUploadResponse>('/zooks/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                    setZookId(response.data.id)
+                    setLoading(false)
+                }
+            ).catch((error: AxiosError<TUploadError>) => {
+                if (error.response) {
+                    setUploadError(error.response.data.error)
+                    setFileValid(false)
+                    setLoading(false)
+
                 } else {
-                    this.setState({error: 'Something Went Wrong', isLoading: false});
+                    throw error
                 }
             })
         }
     }
 
-    onChange(event: any) {
-        const formData = new FormData();
-        formData.append('zook', event.target.files[0]);
-        this.setState({
-            formData: formData
-        });
+    const fileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let file = event.target.files?.item(0)
+        setUploadError(undefined)
+        if (file && file.name.endsWith(".zook")) {
+            const formData = new FormData()
+            formData.append('zook', file)
+            setFormData(formData)
+            setFileValid(true)
+        } else {
+            setFileValid(false)
+        }
     }
 
-    render() {
-        if (this.state.zookid !== 0) {
-            return <Redirect to={'/zooks/' + this.state.zookid}/>
-        }
+    if (zookId) {
+        return <Redirect to={`/zooks/${zookId}`}/>
+    } else {
         return (
             <Segment.Group>
                 <Segment>
@@ -58,7 +72,7 @@ class Upload extends Component {
                     <Table compact color="orange" inverted>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell> <Icon name='attention'/> Upload Requirements</Table.HeaderCell>
+                                <Table.HeaderCell><Icon name='attention'/> Upload Requirements</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
@@ -74,26 +88,23 @@ class Upload extends Component {
                     </Table>
                 </Segment>
                 <Segment>
-                    <Form error={this.state.error !== ''} loading={this.state.isLoading} onSubmit={this.onFormSubmit}>
+                    <Form onSubmit={handleSubmit} loading={loading} error={!!uploadError}>
+                        <Form.Field error={!!uploadError}>
+                            <label>Zook File</label>
+                            <input type='file'
+                                   onChange={fileChange}
+                                   accept=".zook"/>
+                        </Form.Field>
                         <Message
                             error
-                            header='Error'
-                            content={this.state.error}
+                            header={uploadError}
                         />
-
-
-                        <Form.Field>
-                            <label>Zook File</label>
-                            <input type='file' onChange={this.onChange} accept=".zook"/>
-                        </Form.Field>
-
-                        <Button type="submit" color='blue' icon="upload" content="Upload Zook"/>
+                        <Button type="submit" color='blue' icon="upload" disabled={!fileValid} content="Upload Zook"/>
                     </Form>
                 </Segment>
             </Segment.Group>
         )
     }
 }
-
 
 export default Upload

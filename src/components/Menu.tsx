@@ -1,61 +1,70 @@
-import React, {Component} from 'react'
-import {Container, Menu as SMenu} from 'semantic-ui-react'
-import {Link, withRouter} from "react-router-dom";
+import React, {FC} from 'react'
+import {Button, Container, Icon, Menu as SMenu} from 'semantic-ui-react'
+import {NavLink} from "react-router-dom";
+import {UserLoginState, UserState} from "../redux/userReducer";
+import {useSelector} from "react-redux";
+import {ApplicationState} from "../redux/rootReducer";
+import {useLogoutAction} from "../actions/AuthAction";
 
-class Menu extends Component {
-    state = {activeItem: '/'}
 
-    constructor(props: any) {
-        super(props);
-        this.state = {activeItem: props.location.pathname}
+const zookRegex = /^\/zooks\/?\d*$/
+
+const Menu: FC = () => {
+
+    const userState = useSelector<ApplicationState,UserState>(state => state.user)
+
+    const logout = useLogoutAction()
+
+    const loginState = () => {
+
+        switch (userState.state) {
+            case UserLoginState.LoggedIn:
+                let username = userState.username
+                return <SMenu.Menu position='right'>
+                    <NavLink to={`/users/${username}`} activeClassName="active" className="item"
+                             isActive={(_, {pathname}) => {
+                                 return `/users/${username}` === pathname
+                             }}
+                    >{username}</NavLink>
+                    <SMenu.Item>
+                        <Button active={true} onClick={logout} primary>Logout</Button>
+                    </SMenu.Item>
+                </SMenu.Menu>
+
+            case UserLoginState.LoggedOut:
+                return <SMenu.Menu position='right'>
+                    <SMenu.Item>
+                        <NavLink to="/login" activeClassName="active" className="ui primary button">Login</NavLink>
+                    </SMenu.Item>
+                </SMenu.Menu>
+
+            case UserLoginState.Registering:
+                return <SMenu.Menu position='right'>
+                    <SMenu.Item>
+                        <Button active={true} onClick={logout} color='red' primary>Cancel</Button>
+                    </SMenu.Item>
+                </SMenu.Menu>
+        }
     }
 
 
-    handleItemClick = (e: any, {to}: any) => this.setState({activeItem: to})
-
-
-    render() {
-        const {activeItem} = this.state
-
-        return (
-            <Container>
-                <SMenu>
-                    <SMenu.Item
-                        as={Link}
-                        to='/'
-                        active={activeItem === '/'}
-                        onClick={this.handleItemClick}>
-                        ZookLabs
-                    </SMenu.Item>
-
-                    <SMenu.Item
-                        as={Link}
-                        to='/zooks'
-                        active={activeItem === '/zooks'}
-                        onClick={this.handleItemClick}>
-                        Zooks
-                    </SMenu.Item>
-
-                    <SMenu.Item
-                        as={Link}
-                        to='/leagues'
-                        active={activeItem === '/leagues'}
-                        onClick={this.handleItemClick}>
-                        Leagues
-                    </SMenu.Item>
-
-                    <SMenu.Item
-                        as={Link}
-                        to='/zooks/upload'
-                        active={activeItem === '/zooks/upload'}
-                        onClick={this.handleItemClick}>
-                        Upload
-                    </SMenu.Item>
-                </SMenu>
-            </Container>
-        )
-    }
+    return (
+        <Container>
+            <SMenu>
+                <NavLink to="/" activeClassName="active" className="item" exact={true}>ZookLabs</NavLink>
+                <NavLink to="/zooks" activeClassName="active" className="item"
+                         isActive={(_, {pathname}) => {
+                             return zookRegex.test(pathname)
+                         }}
+                >Zooks</NavLink>
+                <NavLink to="/leagues" activeClassName="active" className="item">Leagues</NavLink>
+                <NavLink to="/zooks/upload" activeClassName="active" className="item" exact={true}>Upload</NavLink>
+                <NavLink to="/users" activeClassName="active" className="item">Users</NavLink>
+                {loginState()}
+                <a className="discord item" href="http://discord.zooklabs.com"><Icon name='discord' inverted />Discord</a>
+            </SMenu>
+        </Container>
+    )
 }
 
-// @ts-ignore
-export default withRouter(Menu)
+export default Menu

@@ -1,28 +1,29 @@
 import React, {Component} from 'react';
 import {Header, Icon, List, Loader, Segment} from "semantic-ui-react";
 import axios from 'axios';
-import {TZookIdentifier} from "../types/TZookIdentifier";
+import {TUserIdentifier} from "../types/TUserIdentifier";
 
-interface IZooksProps {
+
+interface IUsersProps {
 
 }
 
-interface IZooksState {
+interface IUsersState {
     loading: boolean
-    zooks: TZookIdentifier[],
+    users: TUserIdentifier[],
 }
 
-export default class Zooks extends Component<IZooksProps,IZooksState> {
+export default class Users extends Component<IUsersProps, IUsersState> {
     state = {
         loading: true,
-        zooks: []
+        users: []
     }
 
     async componentDidMount() {
-        axios.get<TZookIdentifier[]>('/zooks').then(response =>
+        axios.get<TUserIdentifier[]>('/users').then(response =>
             this.setState({
                 loading: false,
-                zooks: response.data
+                users: response.data
             })
         )
     }
@@ -31,11 +32,11 @@ export default class Zooks extends Component<IZooksProps,IZooksState> {
         if (this.state.loading) {
             return <Loader active inline='centered'/>;
         } else {
-            const zookItems = this.state.zooks.map(({id, name}) => (
-                <List.Item href={"/zooks/" + id} key={id}>
-                    <Icon name='bug' inverted/>
+            const userItems = this.state.users.map(({username}) => (
+                <List.Item href={"/users/" + username} key={username}>
+                    <Icon name='user' inverted/>
                     <List.Content>
-                        <List.Header>{id} - <b>{name}</b></List.Header>
+                        <List.Header>{username}</List.Header>
                     </List.Content>
                 </List.Item>
             ))
@@ -43,12 +44,12 @@ export default class Zooks extends Component<IZooksProps,IZooksState> {
                 <Segment.Group>
                     <Segment>
                         <Header size="huge">
-                            Zooks
+                            Users
                         </Header>
                     </Segment>
                     <Segment>
                         <List divided selection size='large'>
-                            {zookItems}
+                            {userItems}
                         </List>
                     </Segment>
                 </Segment.Group>

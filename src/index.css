@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.discord {
+  background-color : #7289DA !important;
+  color: #ffffff !important;
+  transition: 0.3s;
+}
+
+.discord:hover {
+  background-color: #677bc4 !important;
+}
