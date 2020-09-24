@@ -1,6 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import {Card, Grid, Header, Image, Placeholder, Segment} from "semantic-ui-react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 type TLeagues = {
     block_push: number
@@ -22,7 +23,7 @@ const Leagues: FC = () => {
 
     let leagueCard = (league: string, id: number | undefined, name: string, description: string) => {
         return (
-            <Card as='a' href={'/leagues/' + league}>
+            <Card as={Link} to={`/leagues/${league}`}>
                 {id ? (
                     <Image src={'http://static.zooklabs.com/zooks/' + id + '/image.png'} wrapped ui={false}/>
                 ) : (
@@ -36,6 +37,7 @@ const Leagues: FC = () => {
                         {description}
                     </Card.Description>
                 </Card.Content>
+
             </Card>
         )
     }
