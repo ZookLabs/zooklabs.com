@@ -39,7 +39,7 @@ const Login: FC = () => {
     } else {
         switch (userState.state) {
             case UserLoginState.LoggedOut:
-                let discordUrl = `https://discord.com/api/oauth2/authorize?client_id=742381294079705220&redirect_uri=${process.env.REACT_APP_DISCORD_CALLBACK_URL}&response_type=code&scope=identify`
+                let discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_CALLBACK_URL}&response_type=code&scope=identify`
                 return <Segment>
                     <script>{window.location.href = discordUrl}</script>
                     Redirecting to Discord.
