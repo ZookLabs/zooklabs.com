@@ -4,6 +4,7 @@ import {Header, Icon, List, Loader, Segment, Table} from "semantic-ui-react";
 import axios from "axios";
 import {TZookIdentifier} from "../types/TZookIdentifier";
 import {TUserIdentifier} from "../types/TUserIdentifier";
+import {Link} from "react-router-dom";
 
 type TUserAbout = {
     signUpAt: string
@@ -37,7 +38,7 @@ const User: FC = () => {
 
     if (user) {
         const zookItems = user.zooks.map(({id, name}) => (
-            <List.Item href={"/zooks/" + id} key={id}>
+            <List.Item as={Link} to={`/zooks/${id}`} key={id}>
                 <Icon name='bug' inverted/>
                 <List.Content>
                     <List.Header>{id} - <b>{name}</b></List.Header>
