@@ -1,7 +1,7 @@
 # ZookLabs.com
 ![Deploy](https://github.com/ZookLabs/zooklabs.com/workflows/Deploy/badge.svg)
 
-This repo is the front end of [http://zooklabs.com](https://github.com/ZookLabs/zooklabs.com) an unoffical zook hosting website.
+This repo is the front end of [https://zooklabs.com](https://zooklabs.com) an unoffical zook hosting website.
 
 | Layer     | Repo                                                     |
 | --------- | -------------------------------------------------------- |
