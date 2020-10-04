@@ -1,9 +1,10 @@
 import React, {FC} from "react";
-import {Table} from "semantic-ui-react";
+import {Label, Table} from "semantic-ui-react";
 
 export type TZookTrial = {
     score: number
     position: number
+    disqualified: boolean
 }
 
 type ITrialProps = {
@@ -14,11 +15,20 @@ type ITrialProps = {
 
 const Trial: FC<ITrialProps> = (props) => {
     if (props.trial) {
+        const position = (trial: TZookTrial) => {
+
+            if (trial.disqualified) {
+                return <Label color="red">DISQUALIFIED</Label>
+            } else if (trial.position === 2147483647) {
+                return '--'
+            }
+            return trial.position
+        }
         return (
             <Table.Row>
                 <Table.Cell>{props.trialName}</Table.Cell>
                 <Table.Cell>{props.trial.score} {props.measurement}</Table.Cell>
-                <Table.Cell>{props.trial.position === 2147483647 ? '--' : props.trial.position}</Table.Cell>
+                <Table.Cell>{position(props.trial)}</Table.Cell>
             </Table.Row>
         )
     } else {
