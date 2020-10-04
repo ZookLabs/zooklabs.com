@@ -16,7 +16,6 @@ type ITrialProps = {
 const Trial: FC<ITrialProps> = (props) => {
     if (props.trial) {
         const position = (trial: TZookTrial) => {
-
             if (trial.disqualified) {
                 return <Label color="red">DISQUALIFIED</Label>
             } else if (trial.position === 2147483647) {
