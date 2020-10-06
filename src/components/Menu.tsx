@@ -11,7 +11,7 @@ const zookRegex = /^\/zooks\/?\d*$/
 
 const Menu: FC = () => {
 
-    const userState = useSelector<ApplicationState,UserState>(state => state.user)
+    const userState = useSelector<ApplicationState, UserState>(state => state.user)
 
     const logout = useLogoutAction()
 
@@ -51,7 +51,8 @@ const Menu: FC = () => {
     return (
         <Container>
             <SMenu>
-                <NavLink to="/" activeClassName="active" className="item" exact={true}>ZookLabs</NavLink>
+                <NavLink to="/" activeClassName="active" className="item" exact={true} style={{padding: 10}}>
+                    <img src={'logo.png'} alt={"logo"}/><b style={{paddingLeft: 10}}>ZookLabs</b></NavLink>
                 <NavLink to="/zooks" activeClassName="active" className="item"
                          isActive={(_, {pathname}) => {
                              return zookRegex.test(pathname)
@@ -61,7 +62,8 @@ const Menu: FC = () => {
                 <NavLink to="/zooks/upload" activeClassName="active" className="item" exact={true}>Upload</NavLink>
                 <NavLink to="/users" activeClassName="active" className="item">Users</NavLink>
                 {loginState()}
-                <a className="discord item" href="http://discord.zooklabs.com"><Icon name='discord' inverted />Discord</a>
+                <a className="discord item" href="http://discord.zooklabs.com"><Icon name='discord'
+                                                                                     inverted/>Discord</a>
             </SMenu>
         </Container>
     )
