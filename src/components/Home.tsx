@@ -6,7 +6,7 @@ function Home() {
         <Segment.Group>
             <Segment>
                 <Header size="huge">
-                    Welcome To Zook Labs!
+                    Welcome To ZookLabs!
                 </Header>
                 {process.env.REACT_APP_WELCOME_MESSAGE}
             </Segment>
