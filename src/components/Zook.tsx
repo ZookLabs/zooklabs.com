@@ -84,7 +84,7 @@ const Zook: FC = () => {
                     <Grid stackable>
                         <div className="two column row ui segment attached">
                             <Grid.Column style={{flex: "0"}}>
-                                <img src={"http://static.zooklabs.com/zooks/" + zook.identifier.id + "/image.png"}
+                                <img src={`${process.env.REACT_APP_STATIC_URL}/image/${zook.identifier.id}`}
                                      style={{minWidth: 256, maxWidth: 256}} alt={"" + zook.identifier.name}/>
                                 <Button color='blue' as="a" icon="download" fluid content="Download Zook"
                                         href={"http://static.zooklabs.com/zooks/" + zook.identifier.id + "/" + zook.identifier.name + ".zook"}/>
