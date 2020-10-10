@@ -9,6 +9,7 @@ type TLeagues = {
     hurdles: number
     lap: number
     high_jump: number
+    overall_league: number
 }
 
 const Leagues: FC = () => {
@@ -68,6 +69,9 @@ const Leagues: FC = () => {
                         </Grid.Column>
                         <Grid.Column>
                             {leagueCard('hurdles', leagues?.hurdles, 'Hurdles', 'Which Zook does the best at getting over the hurdles?')}
+                        </Grid.Column>
+                        <Grid.Column>
+                            {leagueCard('overall_league', leagues?.overall_league, 'Overall', 'Which Zook is has the best scores across all the leagues?')}
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
