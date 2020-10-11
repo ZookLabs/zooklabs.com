@@ -6,6 +6,7 @@ import {useParams} from "react-router";
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import {TZookIdentifier} from "../types/TZookIdentifier";
+import LoadingZookImage from "./LoadingZookImage";
 
 type TZookOwner = {
     id: string
@@ -54,7 +55,7 @@ const Zook: FC = () => {
         axios.get<TZook>(`zooks/${id}`).then(response =>
             setZook(response.data)
         )
-    },[id])
+    }, [id])
 
 
     if (!zook) {
@@ -84,10 +85,12 @@ const Zook: FC = () => {
                     <Grid stackable>
                         <div className="two column row ui segment attached">
                             <Grid.Column style={{flex: "0"}}>
-                                <img src={`${process.env.REACT_APP_STATIC_URL}/image/${zook.identifier.id}`}
-                                     style={{minWidth: 256, maxWidth: 256}} alt={"" + zook.identifier.name}/>
-                                <Button color='blue' as="a" icon="download" fluid content="Download Zook"
-                                        href={"http://static.zooklabs.com/zooks/" + zook.identifier.id + "/" + zook.identifier.name + ".zook"}/>
+                                <div style={{minWidth: 256}}>
+                                    <LoadingZookImage zookId={zook.identifier.id} alt={zook.identifier.name}
+                                                      style={{marginBottom: 10}}/>
+                                    <Button color='blue' as="a" icon="download" fluid content="Download Zook"
+                                            href={"http://static.zooklabs.com/zooks/" + zook.identifier.id + "/" + zook.identifier.name + ".zook"}/>
+                                </div>
                             </Grid.Column>
                             <Grid.Column style={{flex: "1"}}>
                                 <Table celled striped unstackable color="green">
