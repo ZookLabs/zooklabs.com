@@ -25,7 +25,7 @@ const Leagues: FC = () => {
         return (
             <Card as={Link} to={`/leagues/${league}`}>
                 {id ? (
-                    <Image src={'http://static.zooklabs.com/zooks/' + id + '/image.png'} wrapped ui={false}/>
+                    <Image src={`${process.env.REACT_APP_STATIC_URL}/image/${id}`} wrapped ui={false}/>
                 ) : (
                     <Placeholder>
                         <Placeholder.Image square/>
