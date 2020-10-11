@@ -64,6 +64,10 @@ const App: FC = () => {
                 <Route path="/leagues/lap"
                        render={props => <League {...props} league="lap" title="Lap"
                                                 measurement="sec"/>}/>
+
+                <Route path="/leagues/overall_league"
+                       render={props => <League {...props} league="overall_league" title="Overall"
+                                                measurement=""/>}/>
                 <Redirect to="/"/>
             </Switch>
         </>
