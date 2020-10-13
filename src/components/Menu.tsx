@@ -52,7 +52,8 @@ const Menu: FC = () => {
         <Container>
             <SMenu>
                 <NavLink to="/" activeClassName="active" className="item" exact={true} style={{padding: 10}}>
-                    <img src={'logo.png'} alt={"logo"}/><b style={{paddingLeft: 10}}>ZookLabs</b></NavLink>
+                    <img src={`${process.env.PUBLIC_URL}/logo.png`} alt={"logo"}/><b
+                    style={{paddingLeft: 10}}>ZookLabs</b></NavLink>
                 <NavLink to="/zooks" activeClassName="active" className="item"
                          isActive={(_, {pathname}) => {
                              return zookRegex.test(pathname)
