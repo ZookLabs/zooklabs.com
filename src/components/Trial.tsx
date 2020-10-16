@@ -11,6 +11,7 @@ type ITrialProps = {
     trialName: string
     trial?: TZookTrial
     measurement: string
+    extraStyle?: object
 }
 
 const Trial: FC<ITrialProps> = (props) => {
@@ -24,7 +25,7 @@ const Trial: FC<ITrialProps> = (props) => {
             return trial.position
         }
         return (
-            <Table.Row>
+            <Table.Row style={props.extraStyle}>
                 <Table.Cell>{props.trialName}</Table.Cell>
                 <Table.Cell>{props.trial.score} {props.measurement}</Table.Cell>
                 <Table.Cell>{position(props.trial)}</Table.Cell>
