@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://zooklabs.com/static/css/main.41944880.chunk.css",
-    "main.js": "https://zooklabs.com/static/js/main.80100d53.chunk.js",
-    "main.js.map": "https://zooklabs.com/static/js/main.80100d53.chunk.js.map",
+    "main.js": "https://zooklabs.com/static/js/main.64fec0fe.chunk.js",
+    "main.js.map": "https://zooklabs.com/static/js/main.64fec0fe.chunk.js.map",
     "runtime-main.js": "https://zooklabs.com/static/js/runtime-main.4fc272d5.js",
     "runtime-main.js.map": "https://zooklabs.com/static/js/runtime-main.4fc272d5.js.map",
     "static/css/2.1c3333ec.chunk.css": "https://zooklabs.com/static/css/2.1c3333ec.chunk.css",
     "static/js/2.9cd2bbd5.chunk.js": "https://zooklabs.com/static/js/2.9cd2bbd5.chunk.js",
     "static/js/2.9cd2bbd5.chunk.js.map": "https://zooklabs.com/static/js/2.9cd2bbd5.chunk.js.map",
     "index.html": "https://zooklabs.com/index.html",
-    "precache-manifest.97d6395e8a10ca09e01aaec9d655b627.js": "https://zooklabs.com/precache-manifest.97d6395e8a10ca09e01aaec9d655b627.js",
+    "precache-manifest.13d729e5424a92f999dd0803f2be1b7d.js": "https://zooklabs.com/precache-manifest.13d729e5424a92f999dd0803f2be1b7d.js",
     "service-worker.js": "https://zooklabs.com/service-worker.js",
     "static/css/2.1c3333ec.chunk.css.map": "https://zooklabs.com/static/css/2.1c3333ec.chunk.css.map",
     "static/css/main.41944880.chunk.css.map": "https://zooklabs.com/static/css/main.41944880.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.1c3333ec.chunk.css",
     "static/js/2.9cd2bbd5.chunk.js",
     "static/css/main.41944880.chunk.css",
-    "static/js/main.80100d53.chunk.js"
+    "static/js/main.64fec0fe.chunk.js"
   ]
 }
