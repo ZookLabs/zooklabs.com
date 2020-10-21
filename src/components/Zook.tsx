@@ -33,6 +33,7 @@ type TZookAchievement = {
     hurdles?: TZookTrial
     highJump?: TZookTrial
     lap?: TZookTrial
+    overall?: TZookTrial
 }
 
 type TZook = {
@@ -46,6 +47,10 @@ interface RouteParams {
     id: string
 }
 
+let overallRowStyle = {
+    backgroundColor: "#2185d0",
+    color: "#FFF"
+};
 
 const Zook: FC = () => {
     const [zook, setZook] = useState<TZook>();
@@ -56,7 +61,6 @@ const Zook: FC = () => {
             setZook(response.data)
         )
     }, [id])
-
 
     if (!zook) {
         return <Loader active inline='centered'/>;
@@ -177,6 +181,8 @@ const Zook: FC = () => {
                                                measurement="cm"/>
                                         <Trial trial={zook.achievement.lap} trialName="Lap"
                                                measurement="sec"/>
+                                        <Trial trial={zook.achievement.overall} trialName="Overall"
+                                               measurement="" extraStyle={overallRowStyle}/>
                                     </Table.Body>
                                 </Table>
                             </Grid.Column>
