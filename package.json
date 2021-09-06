@@ -15,7 +15,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
-    "axios": "^0.20.0",
+    "axios": "^0.21.3",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
