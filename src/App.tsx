@@ -17,6 +17,7 @@ import {isRegistering, UserState} from "./redux/userReducer";
 import {useLoginLoadAction} from "./actions/AuthAction";
 import Menu from "./components/Menu";
 import {Container} from "semantic-ui-react";
+import Admin from "./components/Admin";
 
 const App: FC = () => {
 
@@ -68,6 +69,9 @@ const App: FC = () => {
                 <Route path="/leagues/overall_league"
                        render={props => <League {...props} league="overall_league" title="Overall"
                                                 measurement=""/>}/>
+
+                <Route path="/admin" exact component={Admin}/>
+
                 <Redirect to="/"/>
             </Switch>
         </>
