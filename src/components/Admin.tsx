@@ -1,5 +1,5 @@
-import React, {ChangeEvent, Component, FC, useEffect, useState} from 'react';
-import {Button, Dropdown, Form, FormGroup, Header, Icon, List, Loader, Segment} from "semantic-ui-react";
+import React, {FC, useEffect, useState} from 'react';
+import {Button, Dropdown, Form, Header, Segment} from "semantic-ui-react";
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {TUserIdentifier} from "../types/TUserIdentifier";
 
