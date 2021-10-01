@@ -59,6 +59,7 @@ const Admin: FC = () => {
                                 name="owner"
                                 clearable
                                 options={users.map(({username}) => ({
+                                    key: username,
                                     text: username,
                                     value: username
                                 }))}
