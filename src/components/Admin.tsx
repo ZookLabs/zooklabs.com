@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {Button, Dropdown, Form, Header, Segment} from "semantic-ui-react";
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {TUserIdentifier} from "../types/TUserIdentifier";
@@ -51,7 +51,7 @@ const Admin: FC = () => {
                         <Form.Field>
                             <label>ZookId</label>
                             <input name="zookId" placeholder='Zook Id' type="number" inputMode="numeric"
-                                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => setOwnerSetZookId(event.target.value)}/>
+                                   onChange={(event: ChangeEvent<HTMLInputElement>) => setOwnerSetZookId(event.target.value)}/>
                         </Form.Field>
                         <Form.Field>
                             <label>Owner</label>
