@@ -1,26 +1,24 @@
 {
   "files": {
-    "main.css": "https://zooklabs.com/static/css/main.56994c64.chunk.css",
-    "main.js": "https://zooklabs.com/static/js/main.a5edb6de.chunk.js",
-    "main.js.map": "https://zooklabs.com/static/js/main.a5edb6de.chunk.js.map",
-    "runtime-main.js": "https://zooklabs.com/static/js/runtime-main.4fc272d5.js",
-    "runtime-main.js.map": "https://zooklabs.com/static/js/runtime-main.4fc272d5.js.map",
-    "static/css/2.40fa08fe.chunk.css": "https://zooklabs.com/static/css/2.40fa08fe.chunk.css",
-    "static/js/2.36c9d89e.chunk.js": "https://zooklabs.com/static/js/2.36c9d89e.chunk.js",
-    "static/js/2.36c9d89e.chunk.js.map": "https://zooklabs.com/static/js/2.36c9d89e.chunk.js.map",
+    "main.css": "https://zooklabs.com/static/css/main.51446fe1.chunk.css",
+    "main.js": "https://zooklabs.com/static/js/main.afe77367.chunk.js",
+    "main.js.map": "https://zooklabs.com/static/js/main.afe77367.chunk.js.map",
+    "runtime-main.js": "https://zooklabs.com/static/js/runtime-main.207a2fc3.js",
+    "runtime-main.js.map": "https://zooklabs.com/static/js/runtime-main.207a2fc3.js.map",
+    "static/css/2.fec3a729.chunk.css": "https://zooklabs.com/static/css/2.fec3a729.chunk.css",
+    "static/js/2.2b1afb3b.chunk.js": "https://zooklabs.com/static/js/2.2b1afb3b.chunk.js",
+    "static/js/2.2b1afb3b.chunk.js.map": "https://zooklabs.com/static/js/2.2b1afb3b.chunk.js.map",
     "index.html": "https://zooklabs.com/index.html",
-    "precache-manifest.b3fa8ef8992fa05848829cde1b31c447.js": "https://zooklabs.com/precache-manifest.b3fa8ef8992fa05848829cde1b31c447.js",
-    "service-worker.js": "https://zooklabs.com/service-worker.js",
-    "static/css/2.40fa08fe.chunk.css.map": "https://zooklabs.com/static/css/2.40fa08fe.chunk.css.map",
-    "static/css/main.56994c64.chunk.css.map": "https://zooklabs.com/static/css/main.56994c64.chunk.css.map",
-    "static/js/2.36c9d89e.chunk.js.LICENSE.txt": "https://zooklabs.com/static/js/2.36c9d89e.chunk.js.LICENSE.txt",
-    "static/media/semantic.min.css": "https://zooklabs.com/static/media/outline-icons.ef60a4f6.woff"
+    "static/css/2.fec3a729.chunk.css.map": "https://zooklabs.com/static/css/2.fec3a729.chunk.css.map",
+    "static/css/main.51446fe1.chunk.css.map": "https://zooklabs.com/static/css/main.51446fe1.chunk.css.map",
+    "static/js/2.2b1afb3b.chunk.js.LICENSE.txt": "https://zooklabs.com/static/js/2.2b1afb3b.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "https://zooklabs.com/static/media/outline-icons.ddae9b1b.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.4fc272d5.js",
-    "static/css/2.40fa08fe.chunk.css",
-    "static/js/2.36c9d89e.chunk.js",
-    "static/css/main.56994c64.chunk.css",
-    "static/js/main.a5edb6de.chunk.js"
+    "static/js/runtime-main.207a2fc3.js",
+    "static/css/2.fec3a729.chunk.css",
+    "static/js/2.2b1afb3b.chunk.js",
+    "static/css/main.51446fe1.chunk.css",
+    "static/js/main.afe77367.chunk.js"
   ]
 }
