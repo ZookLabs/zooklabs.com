@@ -1,23 +1,25 @@
 import React, {FC, useEffect} from 'react';
 import './App.css';
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {useLoginLoadAction} from "./actions/AuthAction";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Redirect} from "react-router-dom";
+import Register from "./components/Register";
+import {isRegistering, UserState} from "./redux/userReducer";
+import {ApplicationState} from "./redux/rootReducer";
 import Home from "./components/Home";
-import Zooks from "./components/Zooks";
 import Login from "./components/Login";
+import League from "./components/League";
 import Leagues from "./components/Leagues";
+import Users from "./components/Users";
 import Zook from "./components/Zook";
 import Upload from "./components/Upload";
-import League from "./components/League";
-import {useSelector} from "react-redux";
-import User from "./components/User";
-import Users from "./components/Users";
-import Register from "./components/Register";
-import {ApplicationState} from "./redux/rootReducer";
-import {isRegistering, UserState} from "./redux/userReducer";
-import {useLoginLoadAction} from "./actions/AuthAction";
+import Zooks from "./components/Zooks";
+import Admin from "./components/Admin";
 import Menu from "./components/Menu";
 import {Container} from "semantic-ui-react";
-import Admin from "./components/Admin";
+import User from "./components/User";
+
 
 const App: FC = () => {
 

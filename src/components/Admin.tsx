@@ -51,7 +51,7 @@ const Admin: FC = () => {
                         <Form.Field>
                             <label>ZookId</label>
                             <input name="zookId" placeholder='Zook Id' type="number" inputMode="numeric"
-                                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => setOwnerSetZookId(event.target.value)}/>
+                                   onChange={(event: ChangeEvent<HTMLInputElement>) => setOwnerSetZookId(event.target.value)}/>
                         </Form.Field>
                         <Form.Field>
                             <label>Owner</label>
@@ -59,6 +59,7 @@ const Admin: FC = () => {
                                 name="owner"
                                 clearable
                                 options={users.map(({username}) => ({
+                                    key: username,
                                     text: username,
                                     value: username
                                 }))}
