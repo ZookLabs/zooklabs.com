@@ -27,7 +27,7 @@ const App: FC = () => {
 
     const loginLoad = useLoginLoadAction()
 
-    useEffect(loginLoad, []);
+    useEffect(loginLoad, [loginLoad]);
 
     let registering = () => {
         return <>
