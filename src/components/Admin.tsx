@@ -21,11 +21,11 @@ const Admin: FC = () => {
     const [ownerSetOwner, setOwnerSetOwner] = useState<string>()
 
 
-    const [updateOwnerResponse, setUpdateOwnerResponse] = useState<AxiosResponse<string>>()
+    const [updateOwnerResponse, setUpdateOwnerResponse] = useState<AxiosResponse>()
 
     const updateOwner = () => {
         setLoading(true)
-        axios.patch(`admin/zook/${ownerSetZookId}/owner/${ownerSetOwner}`).then(response => {
+        axios.patch(`admin/zook/${ownerSetZookId}/owner/${ownerSetOwner}`).then((response: AxiosResponse) => {
                 setUpdateOwnerResponse(response)
                 setLoading(false)
             }
@@ -59,7 +59,6 @@ const Admin: FC = () => {
                                 name="owner"
                                 clearable
                                 options={users.map(({username}) => ({
-                                    key: username,
                                     text: username,
                                     value: username
                                 }))}
@@ -69,7 +68,7 @@ const Admin: FC = () => {
                         </Form.Field>
                     </Form.Group>
                     <Button type='submit'>Update</Button>
-                    <pre>Response: {updateOwnerResponse?.status} - {updateOwnerResponse?.data}</pre>
+                    <pre>Response: {updateOwnerResponse?.status} - {JSON.stringify(updateOwnerResponse?.data)}</pre>
                 </Form>
 
 

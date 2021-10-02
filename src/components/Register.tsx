@@ -91,7 +91,7 @@ const Register: FC = () => {
                             <Button type='button' disabled={!usernameValid} onClick={checkAvailability} loading={checkLoading}>Check Availability</Button>
                             <Form.Input
                                 label='Username'
-                                value={username}
+                                // value={username}
                                 onChange={usernameChange}
                                 error={!usernameValid || availability === RegisterState.UnAvailable || availability === RegisterState.Error}
                                 loading={checkLoading}
