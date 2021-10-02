@@ -59,7 +59,7 @@ const Zook: FC = () => {
     let {id} = useParams<RouteParams>()
 
     useEffect(() => {
-        axios.get<TZook>(`zooks/${id}`, {withCredentials: true}).then(response =>
+        axios.get<TZook>(`zooks/${id}`).then(response =>
             setZook(response.data)
         )
     }, [id])
