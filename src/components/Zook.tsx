@@ -17,6 +17,8 @@ type TZookAbout = {
     owner?: TZookOwner
     dateCreated: string
     dateUploaded: string
+    downloads: number
+    views: number
 }
 
 type TZookPhysical = {
@@ -57,7 +59,7 @@ const Zook: FC = () => {
     let {id} = useParams<RouteParams>()
 
     useEffect(() => {
-        axios.get<TZook>(`zooks/${id}`).then(response =>
+        axios.get<TZook>(`zooks/${id}`, {withCredentials: true}).then(response =>
             setZook(response.data)
         )
     }, [id])
@@ -118,11 +120,11 @@ const Zook: FC = () => {
                                         </Table.Row>
                                         <Table.Row>
                                             <Table.Cell>Number of Downloads</Table.Cell>
-                                            <Table.Cell>N/A</Table.Cell>
+                                            <Table.Cell>{zook.about.downloads}</Table.Cell>
                                         </Table.Row>
                                         <Table.Row>
                                             <Table.Cell>Number of times viewed</Table.Cell>
-                                            <Table.Cell>N/A</Table.Cell>
+                                            <Table.Cell>{zook.about.views}</Table.Cell>
                                         </Table.Row>
                                     </Table.Body>
                                 </Table>
