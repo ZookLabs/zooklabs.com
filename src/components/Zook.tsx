@@ -94,8 +94,9 @@ const Zook: FC = () => {
                                 <div style={{minWidth: 256}}>
                                     <LoadingZookImage zookId={zook.identifier.id} alt={zook.identifier.name}
                                                       style={{marginBottom: 10}}/>
-                                    <Button color='blue' as="a" icon="download" fluid content="Download Zook"
-                                            href={"http://static.zooklabs.com/zooks/" + zook.identifier.id + "/" + zook.identifier.name + ".zook"}/>
+                                    <Button color='blue' as="a" icon="download" fluid
+                                            content="Download Zook"
+                                            href={`${process.env.REACT_APP_STATIC_URL}/zooks/${zook.identifier.id}/${zook.identifier.name}`}/>
                                 </div>
                             </Grid.Column>
                             <Grid.Column style={{flex: "1"}}>
