@@ -44,7 +44,7 @@ const League: FC<ILeagueProps> = (props) => {
             <Table.Cell>
                 {
                     position < 6 ?
-                        <Image src={`${process.env.REACT_APP_STATIC_URL}/image/${zookId}`}
+                        <Image src={`${process.env.REACT_APP_STATIC_URL}/zooks/${zookId}/image.png`}
                                size={position === 1 ? "small" : "tiny"}/> : null
                 }
             </Table.Cell>
