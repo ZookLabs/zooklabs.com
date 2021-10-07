@@ -25,7 +25,7 @@ const LoadingZookImage: FC<LoadingZookImageProps & React.HTMLProps<HTMLDivElemen
     return <>
         <div {...props} className="ui placeholder" >
             <Image className={imageClass()} onLoad={loaded}
-                   src={`${process.env.REACT_APP_STATIC_URL}/image/${props.zookId}`} alt={props.alt}/>
+                   src={`${process.env.REACT_APP_STATIC_URL}/zooks/${props.zookId}/image.png`} alt={props.alt}/>
         </div>
     </>
 
