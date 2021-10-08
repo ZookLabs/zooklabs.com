@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "https://zooklabs.com/static/css/main.51446fe1.chunk.css",
-    "main.js": "https://zooklabs.com/static/js/main.d62402ab.chunk.js",
-    "main.js.map": "https://zooklabs.com/static/js/main.d62402ab.chunk.js.map",
+    "main.js": "https://zooklabs.com/static/js/main.e44cfcbc.chunk.js",
+    "main.js.map": "https://zooklabs.com/static/js/main.e44cfcbc.chunk.js.map",
     "runtime-main.js": "https://zooklabs.com/static/js/runtime-main.207a2fc3.js",
     "runtime-main.js.map": "https://zooklabs.com/static/js/runtime-main.207a2fc3.js.map",
     "static/css/2.fec3a729.chunk.css": "https://zooklabs.com/static/css/2.fec3a729.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.fec3a729.chunk.css",
     "static/js/2.2b1afb3b.chunk.js",
     "static/css/main.51446fe1.chunk.css",
-    "static/js/main.d62402ab.chunk.js"
+    "static/js/main.e44cfcbc.chunk.js"
   ]
 }
