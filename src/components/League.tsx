@@ -1,19 +1,7 @@
 import React, {FC, useEffect, useState} from "react"
 import {Header, Image, Loader, Segment, Table} from "semantic-ui-react"
-import axios from 'axios';
-
-type TLeagueEntry = {
-    zookId: number
-    name: string
-    score: number
-    position: number
-}
-
-type TLeague = {
-    updatedAt: string
-    entries: TLeagueEntry[]
-}
-
+import {TLeague} from "../types/TLeague";
+import LeagueApi from "../api/LeagueApi";
 
 interface ILeagueProps {
     league: string
@@ -26,7 +14,7 @@ const League: FC<ILeagueProps> = (props) => {
     const [league, setLeague] = useState<TLeague>()
 
     useEffect(() => {
-        axios.get<TLeague>(`/leagues/${props.league}`).then(response => {
+        LeagueApi.getLeague(props.league).then(response => {
             setLeague(response.data)
         })
     }, [props.league])

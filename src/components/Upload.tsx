@@ -1,11 +1,8 @@
 import React, {FC, useState} from 'react'
 import {Button, Form, Header, Icon, Message, Segment, Table} from 'semantic-ui-react'
 import {Redirect} from 'react-router-dom';
-import axios, {AxiosError} from "axios";
-
-type TUploadResponse = {
-    id: number
-}
+import {AxiosError} from "axios";
+import ZookApi from "../api/ZookApi";
 
 type TUploadError = {
     error: string
@@ -24,11 +21,7 @@ const Upload: FC = () => {
     const handleSubmit = () => {
         if (formData.get('zook')) {
             setLoading(true)
-            axios.post<TUploadResponse>('/zooks/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
+            ZookApi.uploadZook(formData).then(response => {
                     setZookId(response.data.id)
                     setLoading(false)
                 }

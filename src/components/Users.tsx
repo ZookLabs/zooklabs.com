@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Header, Icon, List, Loader, Segment} from "semantic-ui-react";
-import axios from 'axios';
 import {TUserIdentifier} from "../types/TUserIdentifier";
 import {Link} from "react-router-dom";
+import UserApi from "../api/UserApi";
 
 
 interface IUsersProps {
@@ -21,7 +21,7 @@ export default class Users extends Component<IUsersProps, IUsersState> {
     }
 
     async componentDidMount() {
-        axios.get<TUserIdentifier[]>('/users').then(response =>
+        UserApi.listUsers().then(response =>
             this.setState({
                 loading: false,
                 users: response.data

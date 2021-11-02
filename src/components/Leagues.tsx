@@ -1,22 +1,14 @@
 import React, {FC, useEffect, useState} from "react";
 import {Card, Grid, Header, Image, Placeholder, Segment} from "semantic-ui-react";
-import axios from "axios";
 import {Link} from "react-router-dom";
-
-type TLeagues = {
-    block_push: number
-    sprint: number
-    hurdles: number
-    lap: number
-    high_jump: number
-    overall_league: number
-}
+import {TLeagues} from "../types/TLeagues";
+import LeagueApi from "../api/LeagueApi";
 
 const Leagues: FC = () => {
     const [leagues, setLeagues] = useState<TLeagues>()
 
     useEffect(() => {
-        axios.get<TLeagues>('/leagues').then(response => {
+        LeagueApi.getLeagues().then(response => {
                 setLeagues(response.data)
             }
         )

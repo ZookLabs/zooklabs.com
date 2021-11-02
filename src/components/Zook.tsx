@@ -1,49 +1,13 @@
 import React, {FC, useEffect, useState} from 'react';
-import Trial, {TZookTrial} from "./Trial";
+import Trial from "./Trial";
 import {Grid, Header, Loader, Segment, Table} from 'semantic-ui-react';
 import Button from "semantic-ui-react/dist/commonjs/elements/Button";
 import {useParams} from "react-router";
-import axios from 'axios';
 import {Link} from "react-router-dom";
-import {TZookIdentifier} from "../types/TZookIdentifier";
 import LoadingZookImage from "./LoadingZookImage";
+import ZookApi from "../api/ZookApi";
+import {TZook} from "../types/TZook";
 
-type TZookOwner = {
-    id: string
-    username: string
-}
-
-type TZookAbout = {
-    owner?: TZookOwner
-    dateCreated: string
-    dateUploaded: string
-    downloads: number
-    views: number
-}
-
-type TZookPhysical = {
-    height: number
-    length: number
-    width: number
-    weight: number
-    components: number
-}
-
-type TZookAchievement = {
-    sprint?: TZookTrial
-    blockPush?: TZookTrial
-    hurdles?: TZookTrial
-    highJump?: TZookTrial
-    lap?: TZookTrial
-    overall?: TZookTrial
-}
-
-type TZook = {
-    identifier: TZookIdentifier
-    about: TZookAbout
-    physical: TZookPhysical
-    achievement: TZookAchievement
-}
 
 interface RouteParams {
     id: string
@@ -59,7 +23,7 @@ const Zook: FC = () => {
     let {id} = useParams<RouteParams>()
 
     useEffect(() => {
-        axios.get<TZook>(`zooks/${id}`, {withCredentials: true}).then(response =>
+        ZookApi.getZook(id).then(response =>
             setZook(response.data)
         )
     }, [id])
@@ -92,7 +56,7 @@ const Zook: FC = () => {
                         <div className="two column row ui segment attached">
                             <Grid.Column style={{flex: "0"}}>
                                 <div style={{minWidth: 256}}>
-                                    <LoadingZookImage zookId={zook.identifier.id} alt={zook.identifier.name}
+                                    <LoadingZookImage zookid={zook.identifier.id} alt={zook.identifier.name}
                                                       style={{marginBottom: 10}}/>
                                     <Button color='blue' as="a" icon="download" fluid
                                             content="Download Zook"

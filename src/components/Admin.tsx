@@ -1,7 +1,9 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {Button, Dropdown, Form, Header, Segment} from "semantic-ui-react";
-import axios, {AxiosError, AxiosResponse} from 'axios';
+import {AxiosError, AxiosResponse} from 'axios';
 import {TUserIdentifier} from "../types/TUserIdentifier";
+import UserApi from "../api/UserApi";
+import AdminApi from "../api/AdminApi";
 
 const Admin: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
@@ -9,7 +11,7 @@ const Admin: FC = () => {
 
     useEffect(() => {
         setLoading(true)
-        axios.get<TUserIdentifier[]>('/users').then(response => {
+        UserApi.listUsers().then(response => {
                 setLoading(false)
                 setUsers(response.data)
             }
@@ -25,7 +27,7 @@ const Admin: FC = () => {
 
     const updateOwner = () => {
         setLoading(true)
-        axios.patch(`admin/zook/${ownerSetZookId}/owner/${ownerSetOwner}`).then((response: AxiosResponse) => {
+        AdminApi.setOwner(ownerSetZookId, ownerSetOwner).then((response: AxiosResponse) => {
                 setUpdateOwnerResponse(response)
                 setLoading(false)
             }

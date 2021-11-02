@@ -14,34 +14,37 @@ const Login: FC = () => {
 
     const login: (code: string) => Promise<void> = useLoginAction()
 
-    let location = useLocation()
-    let history = useHistory()
+    const location = useLocation()
+    const history = useHistory()
 
-    let code = new URLSearchParams(location.search).get("code")
+    const [loggingIn, setLoggingIn] = useState<boolean>(true);
 
-    let loggingInState = () => {
-        if (code) {
-            history.replace("/login")
-            return true
-        } else {
-            return false
-        }
-    }
-
-    const [loggingIn, setLoggingIn] = useState<boolean>(loggingInState());
+    const discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_CALLBACK_URL}&response_type=code&scope=identify`
 
     useEffect(() => {
-        if (code) { login(code).then(() => setLoggingIn(false))}
-    }, [code,login])
+        if (loggingIn) {
+            let code = new URLSearchParams(location.search).get("code")
+            if (code) {
+                login(code).then(() => {
+                    history.replace("/login")
+                    setLoggingIn(false)
+                })
+            } else {
+                setLoggingIn(false)
+            }
+        } else {
+            if (userState.state === UserLoginState.LoggedOut) {
+                window.location.replace(discordUrl)
+            }
+        }
+    }, [loggingIn, location.search, history])
 
     if (loggingIn) {
         return <Segment><Loader active inline='centered'/></Segment>
     } else {
         switch (userState.state) {
             case UserLoginState.LoggedOut:
-                let discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_CALLBACK_URL}&response_type=code&scope=identify`
                 return <Segment>
-                    <script>{window.location.href = discordUrl}</script>
                     Redirecting to Discord.
                     <a href={discordUrl}>Not Redirecting? Click Here!</a>
                     <Loader active inline='centered'/>
@@ -50,7 +53,7 @@ const Login: FC = () => {
             case UserLoginState.Registering:
                 return <Segment><Loader active inline='centered'/></Segment>
             case UserLoginState.LoggedIn:
-                return <Redirect to={`/users/${userState.username}`}/>
+                return <Redirect push to={`/users/${userState.username}`}/>
         }
     }
 }

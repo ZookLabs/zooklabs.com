@@ -1,21 +1,9 @@
 import React, {FC, useEffect, useState} from "react";
 import {useHistory, useParams} from "react-router";
 import {Header, Icon, List, Loader, Segment, Table} from "semantic-ui-react";
-import axios from "axios";
-import {TZookIdentifier} from "../types/TZookIdentifier";
-import {TUserIdentifier} from "../types/TUserIdentifier";
 import {Link} from "react-router-dom";
-
-type TUserAbout = {
-    signUpAt: string
-    lastLoginAt: string
-}
-
-type TUser = {
-    identifier: TUserIdentifier,
-    about: TUserAbout,
-    zooks: TZookIdentifier[]
-}
+import {TUser} from "../types/TUser";
+import UserApi from "../api/UserApi";
 
 interface RouteParams {
     username: string
@@ -28,7 +16,7 @@ const User: FC = () => {
     const [user, setUser] = useState<TUser>();
 
     useEffect(() => {
-        axios.get<TUser>(`users/${username}`).then(response => {
+        UserApi.getUser(username).then(response => {
                 history.replace(response.data.identifier.username)
                 setUser(response.data)
             }

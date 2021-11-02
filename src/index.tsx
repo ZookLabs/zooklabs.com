@@ -9,9 +9,6 @@ import {createStore, Store} from 'redux'
 import {Provider as StoreProvider} from "react-redux";
 import {ApplicationState, rootReducer} from "./redux/rootReducer";
 import {devToolsEnhancer} from "redux-devtools-extension/index";
-import axios from 'axios';
-
-axios.defaults.baseURL = process.env.REACT_APP_API_URL
 
 const store: Store<ApplicationState> = createStore(rootReducer, devToolsEnhancer({}));
 

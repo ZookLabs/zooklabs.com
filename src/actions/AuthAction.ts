@@ -1,8 +1,10 @@
 import jwt_decode from "jwt-decode";
 import {LoginUser, LogoutUser, RegisterUser} from "../redux/userActions";
-import axios, {AxiosResponse} from "axios";
 import {useDispatch} from "react-redux";
 import {useCookies} from "react-cookie";
+import {removeAuthorization, setAuthorization} from "../api/api";
+import {AxiosResponse} from "axios";
+import UserApi from "../api/UserApi";
 
 type JwtToken = {
     username?: string
@@ -17,7 +19,7 @@ const maxAge = (exp: number) => exp - Math.floor(Date.now() / 1000)
 export const useDispatchLogin = () => {
     const dispatch = useDispatch()
     return (token: string, decodedToken: JwtToken) => {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        setAuthorization(token)
         if (decodedToken.username) {
             dispatch(LoginUser(decodedToken.username))
         } else {
@@ -43,7 +45,7 @@ export const useLogoutAction = () => {
     const dispatch = useDispatch()
     const [, , removeCookie] = useCookies()
     return () => {
-        axios.defaults.headers = undefined
+        removeAuthorization()
         removeCookie("token")
         dispatch(LogoutUser())
     }
@@ -72,17 +74,17 @@ const useLoginResponseAction = () => {
     }
 }
 
-export const useRegisterAction = () => {
+export function useRegisterAction() {
     const login = useLoginResponseAction()
     return (username: string) => {
-        return axios.post(`/login/register`, {username: username}).then(login)
+        return UserApi.registerUser(username).then(login)
     }
 }
 
-export const useLoginAction = () => {
+export function useLoginAction() {
     const login = useLoginResponseAction()
     return (code: string) => {
-        return axios.get(`/login?code=${code}`).then(login)
+        return UserApi.loginUser(code).then(login)
     }
 }
 

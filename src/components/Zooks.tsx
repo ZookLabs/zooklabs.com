@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Header, Icon, List, Loader, Segment} from "semantic-ui-react";
-import axios from 'axios';
 import {TZookIdentifier} from "../types/TZookIdentifier";
 import {Link} from "react-router-dom";
+import ZookApi from "../api/ZookApi";
 
 interface IZooksProps {
 
@@ -20,7 +20,7 @@ export default class Zooks extends Component<IZooksProps,IZooksState> {
     }
 
     async componentDidMount() {
-        axios.get<TZookIdentifier[]>('/zooks').then(response =>
+        ZookApi.getZooks().then(response =>
             this.setState({
                 loading: false,
                 zooks: response.data
