@@ -6,11 +6,11 @@ import {TZook} from "../types/TZook";
 
 namespace ZookApi {
     export async function getZooks(): Promise<AxiosResponse<TZookIdentifier[]>> {
-        return http.get<TZookIdentifier[]>('/zooks', {withCredentials: true})
+        return http.get<TZookIdentifier[]>('/zooks')
     }
 
     export async function getZook(id: string): Promise<AxiosResponse<TZook>> {
-        return http.get<TZook>(`zooks/${id}`)
+        return http.get<TZook>(`zooks/${id}`, {withCredentials: true})
     }
 
     export async function uploadZook(formData: FormData): Promise<AxiosResponse<TUploadResponse>> {
