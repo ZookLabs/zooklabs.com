@@ -9,7 +9,9 @@ import {useLoginLoadAction} from "./actions/AuthAction";
 
 const App: FC = () => {
 
-    useEffect(useLoginLoadAction(), []);
+    const loginLoadAction = useLoginLoadAction()
+
+    useEffect(loginLoadAction, [loginLoadAction]);
 
     return (
         <Router>

@@ -22,7 +22,7 @@ const Login: FC = () => {
     const discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_CALLBACK_URL}&response_type=code&scope=identify`
 
     useEffect(() => {
-        if (loggingIn) {
+        if (loggingIn && userState.state === UserLoginState.LoggedOut) {
             let code = new URLSearchParams(location.search).get("code")
             if (code) {
                 login(code).then(() => {
@@ -37,7 +37,7 @@ const Login: FC = () => {
                 window.location.replace(discordUrl)
             }
         }
-    }, [loggingIn, location.search, history])
+    }, [loggingIn, login, location.search, history, userState.state, discordUrl])
 
     if (loggingIn) {
         return <Segment><Loader active inline='centered'/></Segment>

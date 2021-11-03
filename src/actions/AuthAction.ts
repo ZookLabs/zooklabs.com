@@ -5,6 +5,7 @@ import {useCookies} from "react-cookie";
 import {removeAuthorization, setAuthorization} from "../api/api";
 import {AxiosResponse} from "axios";
 import UserApi from "../api/UserApi";
+import {useCallback} from "react";
 
 type JwtToken = {
     username?: string
@@ -15,48 +16,47 @@ const getToken = (bearer: string) => bearer.substring(7, bearer.length)
 
 const maxAge = (exp: number) => exp - Math.floor(Date.now() / 1000)
 
-
-export const useDispatchLogin = () => {
+export function useDispatchLogin() {
     const dispatch = useDispatch()
-    return (token: string, decodedToken: JwtToken) => {
+    return useCallback((token: string, decodedToken: JwtToken) => {
         setAuthorization(token)
         if (decodedToken.username) {
             dispatch(LoginUser(decodedToken.username))
         } else {
             dispatch(RegisterUser())
         }
-    }
+    }, [dispatch])
 }
 
-export const useLoginLoadAction = () => {
+export function useLoginLoadAction() {
     const [cookies] = useCookies(['token'])
     const dispatchLogin = useDispatchLogin()
 
-    return () => {
+    return useCallback(() => {
         let token: string | undefined = cookies.token
         if (token) {
             let decodedToken = jwt_decode<JwtToken>(token)
             dispatchLogin(token, decodedToken)
         }
-    }
+    }, [cookies.token, dispatchLogin])
 }
 
-export const useLogoutAction = () => {
+export function useLogoutAction() {
     const dispatch = useDispatch()
     const [, , removeCookie] = useCookies()
-    return () => {
+    return useCallback(() => {
         removeAuthorization()
         removeCookie("token")
         dispatch(LogoutUser())
-    }
+    }, [removeCookie, dispatch])
 }
 
 
-const useLoginResponseAction = () => {
+function useLoginResponseAction() {
     const [, setCookie] = useCookies()
     const dispatchLogin = useDispatchLogin()
 
-    return (response: AxiosResponse) => {
+    return useCallback((response: AxiosResponse) => {
         let authorizationHeader = response.headers.authorization
         if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
 
@@ -71,20 +71,20 @@ const useLoginResponseAction = () => {
         } else {
             throw new Error("authorization header does not start with Bearer ")
         }
-    }
+    }, [setCookie, dispatchLogin])
 }
 
 export function useRegisterAction() {
-    const login = useLoginResponseAction()
-    return (username: string) => {
-        return UserApi.registerUser(username).then(login)
-    }
+    const loginResponseAction = useLoginResponseAction()
+    return useCallback((username: string) => {
+        return UserApi.registerUser(username).then(loginResponseAction)
+    }, [loginResponseAction])
 }
 
 export function useLoginAction() {
-    const login = useLoginResponseAction()
-    return (code: string) => {
-        return UserApi.loginUser(code).then(login)
-    }
+    const loginResponseAction = useLoginResponseAction()
+    return useCallback((code: string) => {
+        return UserApi.loginUser(code).then(loginResponseAction)
+    }, [loginResponseAction])
 }
 

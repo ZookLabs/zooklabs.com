@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useState} from "react";
+import React, {FC, useState} from "react";
 import {Button, Form, Header, Icon, Message, Segment, Table} from "semantic-ui-react";
 import {AxiosError, AxiosResponse} from "axios";
 import {useRegisterAction} from "../actions/AuthAction";
