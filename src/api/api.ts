@@ -3,8 +3,7 @@ import axios, {AxiosInstance} from 'axios';
 const http: AxiosInstance = axios.create(
     {
         baseURL: `${process.env.REACT_APP_API_URL}/api`,
-        headers: {'Content-Type': 'application/json'},
-        withCredentials: true
+        headers: {'Content-Type': 'application/json'}
     });
 
 export default http
