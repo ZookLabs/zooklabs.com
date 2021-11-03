@@ -63,7 +63,7 @@ function useLoginResponseAction() {
             let token = getToken(authorizationHeader)
             let decodedToken = jwt_decode<JwtToken>(token)
 
-            setCookie("token", token, {maxAge: maxAge(decodedToken.exp), sameSite: "strict"})
+            setCookie("token", token, {maxAge: maxAge(decodedToken.exp), sameSite: "strict", secure : true})
 
             dispatchLogin(token, decodedToken)
         } else if (!authorizationHeader) {
