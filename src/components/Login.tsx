@@ -17,29 +17,30 @@ const Login: FC = () => {
     const location = useLocation()
     const history = useHistory()
 
-    const [loggingIn, setLoggingIn] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_CALLBACK_URL}&response_type=code&scope=identify`
 
     useEffect(() => {
-        if (loggingIn && userState.state === UserLoginState.LoggedOut) {
+        if (loading && userState.state === UserLoginState.LoggedOut) {
             let code = new URLSearchParams(location.search).get("code")
             if (code) {
                 login(code).then(() => {
                     history.replace("/login")
-                    setLoggingIn(false)
+                    setLoading(false)
                 })
             } else {
-                setLoggingIn(false)
+                setLoading(false)
             }
-        } else {
-            if (userState.state === UserLoginState.LoggedOut) {
-                window.location.replace(discordUrl)
-            }
+        } else if (userState.state === UserLoginState.LoggedOut) {
+            window.location.replace(discordUrl)
+        } else if (userState.state === UserLoginState.LoggedIn) {
+            setLoading(false)
         }
-    }, [loggingIn, login, location.search, history, userState.state, discordUrl])
 
-    if (loggingIn) {
+    }, [loading, login, location.search, history, userState.state, discordUrl])
+
+    if (loading) {
         return <Segment><Loader active inline='centered'/></Segment>
     } else {
         switch (userState.state) {

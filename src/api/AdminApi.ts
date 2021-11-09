@@ -1,11 +1,11 @@
 import {AxiosResponse} from "axios";
 
-import http from "./api";
+import api from "./api";
 
 namespace AdminApi {
 
     export async function setOwner(zookId?: string, ownerId?: string): Promise<AxiosResponse> {
-        return http.patch(`admin/zook/${zookId}/owner/${ownerId}`)
+        return api.patch(`admin/zook/${zookId}/owner/${ownerId}`)
     }
 
 }

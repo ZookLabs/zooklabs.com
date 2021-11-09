@@ -12,8 +12,6 @@ type JwtToken = {
     exp: number
 }
 
-const getToken = (bearer: string) => bearer.substring(7, bearer.length)
-
 const maxAge = (exp: number) => exp - Math.floor(Date.now() / 1000)
 
 export function useDispatchLogin() {
@@ -56,20 +54,16 @@ function useLoginResponseAction() {
     const [, setCookie] = useCookies()
     const dispatchLogin = useDispatchLogin()
 
-    return useCallback((response: AxiosResponse) => {
-        let authorizationHeader = response.headers.authorization
-        if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
-
-            let token = getToken(authorizationHeader)
+    return useCallback((response: AxiosResponse<string>) => {
+        let token = response.data
+        if (token) {
             let decodedToken = jwt_decode<JwtToken>(token)
 
-            setCookie("token", token, {maxAge: maxAge(decodedToken.exp), sameSite: "strict", secure : true})
+            setCookie("token", token, {maxAge: maxAge(decodedToken.exp), sameSite: "strict", secure: true})
 
             dispatchLogin(token, decodedToken)
-        } else if (!authorizationHeader) {
-            throw new Error("authorization header missing")
         } else {
-            throw new Error("authorization header does not start with Bearer ")
+            throw new Error("body missing")
         }
     }, [setCookie, dispatchLogin])
 }
