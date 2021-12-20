@@ -5,9 +5,10 @@ import Menu from "./components/Menu";
 import {Container} from "semantic-ui-react";
 import Routes from "./components/Routes";
 import {useLoginLoadAction} from "./actions/AuthAction";
-
+import splitbee from '@splitbee/web';
 
 const App: FC = () => {
+    splitbee.init()
 
     const loginLoadAction = useLoginLoadAction()
 

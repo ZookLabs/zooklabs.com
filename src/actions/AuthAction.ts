@@ -6,6 +6,8 @@ import {removeAuthorization, setAuthorization} from "../api/api";
 import {AxiosResponse} from "axios";
 import UserApi from "../api/UserApi";
 import {useCallback} from "react";
+import splitbee from '@splitbee/web';
+
 
 type JwtToken = {
     username?: string
@@ -19,6 +21,9 @@ export function useDispatchLogin() {
     return useCallback((token: string, decodedToken: JwtToken) => {
         setAuthorization(token)
         if (decodedToken.username) {
+            splitbee.user.set({
+                username: decodedToken.username
+            })
             dispatch(LoginUser(decodedToken.username))
         } else {
             dispatch(RegisterUser())
@@ -45,6 +50,8 @@ export function useLogoutAction() {
     return useCallback(() => {
         removeAuthorization()
         removeCookie("token")
+        splitbee.track("User Logout")
+        splitbee.reset()
         dispatch(LogoutUser())
     }, [removeCookie, dispatch])
 }
@@ -71,6 +78,10 @@ function useLoginResponseAction() {
 export function useRegisterAction() {
     const loginResponseAction = useLoginResponseAction()
     return useCallback((username: string) => {
+        splitbee.track("Register Username", {
+                username: username
+            }
+        )
         return UserApi.registerUser(username).then(loginResponseAction)
     }, [loginResponseAction])
 }
@@ -78,6 +89,7 @@ export function useRegisterAction() {
 export function useLoginAction() {
     const loginResponseAction = useLoginResponseAction()
     return useCallback((code: string) => {
+        splitbee.track("User Login")
         return UserApi.loginUser(code).then(loginResponseAction)
     }, [loginResponseAction])
 }

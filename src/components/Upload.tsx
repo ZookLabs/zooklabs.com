@@ -3,6 +3,7 @@ import {Button, Form, Header, Icon, Message, Segment, Table} from 'semantic-ui-r
 import {Redirect} from 'react-router-dom';
 import {AxiosError} from "axios";
 import ZookApi from "../api/ZookApi";
+import splitbee from "@splitbee/web";
 
 type TUploadError = {
     error: string
@@ -17,21 +18,24 @@ const Upload: FC = () => {
 
     const [uploadError, setUploadError] = useState<string>()
 
-
     const handleSubmit = () => {
         if (formData.get('zook')) {
             setLoading(true)
+            splitbee.track("Zook Upload")
             ZookApi.uploadZook(formData).then(response => {
                     setZookId(response.data.id)
                     setLoading(false)
                 }
             ).catch((error: AxiosError<TUploadError>) => {
+                setFileValid(false)
+                setLoading(false)
                 if (error.response) {
                     setUploadError(error.response.data.error)
-                    setFileValid(false)
-                    setLoading(false)
-
+                    splitbee.track("Zook Upload Error", {
+                        error: error.response.data.error
+                    })
                 } else {
+                    splitbee.track("Unexpected Zook Upload Error")
                     throw error
                 }
             })
