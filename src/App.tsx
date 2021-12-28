@@ -8,7 +8,7 @@ import {useLoginLoadAction} from "./actions/AuthAction";
 import splitbee from '@splitbee/web';
 
 const App: FC = () => {
-    splitbee.init()
+    splitbee.init({disableCookie: true})
 
     const loginLoadAction = useLoginLoadAction()
 
