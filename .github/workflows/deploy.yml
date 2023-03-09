@@ -1,9 +1,10 @@
 name: Deploy
 
-on:
-  push:
-    branches:
-      - master
+# disabled as site now deployed through netlify
+# on:
+#   push:
+#     branches:
+#       - master
 
 jobs:
   build:
