@@ -1,16 +1,17 @@
 import {AxiosResponse} from "axios";
 import {TZookIdentifier} from "../types/TZookIdentifier";
 import api from "./api";
+import denoApi from "./denoApi";
 import {TUploadResponse} from "../types/TUploadResponse";
 import {TZook} from "../types/TZook";
 
 namespace ZookApi {
     export async function getZooks(): Promise<AxiosResponse<TZookIdentifier[]>> {
-        return api.get<TZookIdentifier[]>('/zooks')
+        return denoApi.get<TZookIdentifier[]>('/zooks')
     }
 
     export async function getZook(id: string): Promise<AxiosResponse<TZook>> {
-        return api.get<TZook>(`zooks/${id}`)
+        return denoApi.get<TZook>(`zooks/${id}`)
     }
 
     export async function uploadZook(formData: FormData): Promise<AxiosResponse<TUploadResponse>> {
