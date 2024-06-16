@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {TAvailability} from "../types/TAvailability";
 import api from "./api";
+import denoApi from "./denoApi";
 import {TUserIdentifier} from "../types/TUserIdentifier";
 import {TUser} from "../types/TUser";
 
@@ -18,7 +19,7 @@ namespace UserApi {
     }
 
     export async function listUsers(): Promise<AxiosResponse<TUserIdentifier[]>> {
-        return api.get<TUserIdentifier[]>('/users')
+        return denoApi.get<TUserIdentifier[]>('/users')
     }
 
     export async function getUser(username: string): Promise<AxiosResponse<TUser>> {
