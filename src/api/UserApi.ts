@@ -23,7 +23,7 @@ namespace UserApi {
     }
 
     export async function getUser(username: string): Promise<AxiosResponse<TUser>> {
-        return api.get<TUser>(`/users/${username}`)
+        return denoApi.get<TUser>(`/users/${username}`)
     }
 }
 
