@@ -3,6 +3,7 @@ import {LoginUser, LogoutUser, RegisterUser} from "../redux/userActions";
 import {useDispatch} from "react-redux";
 import {useCookies} from "react-cookie";
 import {removeAuthorization, setAuthorization} from "../api/api";
+import {removeDenoAuthorization, setDenoAuthorization} from "../api/api";
 import {AxiosResponse} from "axios";
 import UserApi from "../api/UserApi";
 import {useCallback} from "react";
@@ -20,6 +21,7 @@ export function useDispatchLogin() {
     const dispatch = useDispatch()
     return useCallback((token: string, decodedToken: JwtToken) => {
         setAuthorization(token)
+        setDenoAuthorization(token)
         if (decodedToken.username) {
             splitbee.user.set({
                 username: decodedToken.username
@@ -49,6 +51,7 @@ export function useLogoutAction() {
     const [, , removeCookie] = useCookies()
     return useCallback(() => {
         removeAuthorization()
+        removeDenoAuthorization()
         removeCookie("token")
         splitbee.track("User Logout")
         splitbee.reset()
