@@ -9,12 +9,12 @@ const denoApi: AxiosInstance = axios.create(
 
 export default denoApi
 
-export function removeAuthorization() {
+export function removeDenoAuthorization() {
     // @ts-ignore
     delete denoApi.defaults.headers.common["Authorization"]
 }
 
-export function setAuthorization(token: string) {
+export function setDenoAuthorization(token: string) {
     denoApi.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
