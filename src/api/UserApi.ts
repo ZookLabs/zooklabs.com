@@ -7,11 +7,11 @@ import {TUser} from "../types/TUser";
 
 namespace UserApi {
     export async function checkUsername(username: string): Promise<AxiosResponse<TAvailability>> {
-        return api.get<TAvailability>(`/login/availability/${username}`)
+        return denoApi.get<TAvailability>(`/login/availability/${username}`)
     }
 
     export async function registerUser(username: string): Promise<AxiosResponse> {
-        return api.post(`/login/register`, {username: username})
+        return denoApi.post(`/login/register`, {username: username})
     }
 
     export async function loginUser(code: string): Promise<AxiosResponse> {
