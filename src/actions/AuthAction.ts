@@ -3,7 +3,7 @@ import {LoginUser, LogoutUser, RegisterUser} from "../redux/userActions";
 import {useDispatch} from "react-redux";
 import {useCookies} from "react-cookie";
 import {removeAuthorization, setAuthorization} from "../api/api";
-import {removeDenoAuthorization, setDenoAuthorization} from "../api/api";
+import {removeDenoAuthorization, setDenoAuthorization} from "../api/denoApi";
 import {AxiosResponse} from "axios";
 import UserApi from "../api/UserApi";
 import {useCallback} from "react";
