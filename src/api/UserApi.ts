@@ -15,7 +15,7 @@ namespace UserApi {
     }
 
     export async function loginUser(code: string): Promise<AxiosResponse> {
-        return api.get(`/login?code=${code}`)
+        return denoApi.get(`/login?code=${code}`)
     }
 
     export async function listUsers(): Promise<AxiosResponse<TUserIdentifier[]>> {
