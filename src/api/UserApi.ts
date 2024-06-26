@@ -1,6 +1,5 @@
 import {AxiosResponse} from "axios";
 import {TAvailability} from "../types/TAvailability";
-import api from "./api";
 import denoApi from "./denoApi";
 import {TUserIdentifier} from "../types/TUserIdentifier";
 import {TUser} from "../types/TUser";
