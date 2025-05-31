@@ -2,7 +2,6 @@ import jwt_decode from "jwt-decode";
 import {LoginUser, LogoutUser, RegisterUser} from "../redux/userActions";
 import {useDispatch} from "react-redux";
 import {useCookies} from "react-cookie";
-import {removeAuthorization, setAuthorization} from "../api/api";
 import {removeDenoAuthorization, setDenoAuthorization} from "../api/denoApi";
 import {AxiosResponse} from "axios";
 import UserApi from "../api/UserApi";
@@ -20,7 +19,6 @@ const maxAge = (exp: number) => exp - Math.floor(Date.now() / 1000)
 export function useDispatchLogin() {
     const dispatch = useDispatch()
     return useCallback((token: string, decodedToken: JwtToken) => {
-        setAuthorization(token)
         setDenoAuthorization(token)
         if (decodedToken.username) {
             splitbee.user.set({
@@ -50,7 +48,6 @@ export function useLogoutAction() {
     const dispatch = useDispatch()
     const [, , removeCookie] = useCookies()
     return useCallback(() => {
-        removeAuthorization()
         removeDenoAuthorization()
         removeCookie("token")
         splitbee.track("User Logout")

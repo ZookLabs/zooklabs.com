@@ -60,7 +60,7 @@ const Zook: FC = () => {
                                                       style={{marginBottom: 10}}/>
                                     <Button color='blue' as="a" icon="download" fluid
                                             content="Download Zook"
-                                            href={`${process.env.REACT_APP_API_URL}/static/zooks/${zook.identifier.id}/${zook.identifier.name}.zook`}/>
+                                            href={`${process.env.REACT_APP_DENO_API_URL}/api/zooks/download/${zook.identifier.id}/${zook.identifier.name}.zook`}/>
                                 </div>
                             </Grid.Column>
                             <Grid.Column style={{flex: "1"}}>

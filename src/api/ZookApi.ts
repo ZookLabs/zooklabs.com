@@ -1,6 +1,5 @@
 import {AxiosResponse} from "axios";
 import {TZookIdentifier} from "../types/TZookIdentifier";
-import api from "./api";
 import denoApi from "./denoApi";
 import {TUploadResponse} from "../types/TUploadResponse";
 import {TZook} from "../types/TZook";
@@ -15,7 +14,7 @@ namespace ZookApi {
     }
 
     export async function uploadZook(formData: FormData): Promise<AxiosResponse<TUploadResponse>> {
-        return api.post('zooks/upload', formData, {
+        return denoApi.post('zooks/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
