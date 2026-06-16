@@ -23,8 +23,7 @@ const Menu: FC = () => {
                 <NavLink to="/zooks/upload" activeClassName="active" className="item" exact={true}>Upload</NavLink>
                 <NavLink to="/users" activeClassName="active" className="item">Users</NavLink>
                 <LoginButton/>
-                <a className="discord item" href="http://discord.zooklabs.com" data-splitbee-event="External Link"
-                   data-splitbee-event-destination="discord"><Icon name='discord'
+                <a className="discord item" href="http://discord.zooklabs.com"><Icon name='discord'
                                                                    inverted/>Discord</a>
             </SMenu>
         </Container>
